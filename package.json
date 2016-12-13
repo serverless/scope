@@ -1,0 +1,9 @@
+{
+  "name": "roadmap",
+  "version": "1.0.0",
+  "description": "Custom Roadmap Application",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "license": "MIT"
+}
