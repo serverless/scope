@@ -1,0 +1,16 @@
+
+service: roadmap-github-webhook
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+functions:
+  githubWebhookListener:
+    handler: handler.githubWebhookListener
+    events:
+      - http:
+          path: api/public
+          method: post
+          integration: lambda
+          cors: true
