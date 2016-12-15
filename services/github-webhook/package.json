@@ -1,0 +1,15 @@
+{
+  "name": "github-webhook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "0.0.3",
+    "lodash.isempty": "^4.4.0"
+  }
+}
