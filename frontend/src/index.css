@@ -23,8 +23,8 @@ ul {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-          /*max-height: 100vh;
-          overflow: hidden;*/
+          max-height: 100vh;
+          overflow: hidden;
 }
 @media (max-width: 690px) {
   .drag-list {
@@ -40,12 +40,35 @@ ul {
           flex: 1;
   margin: 0 10px;
   position: relative;
-  background: rgba(0, 0, 0, 0.2);
   overflow: hidden;
+}
+.mobile-switcher {
+  display: none;
+  width: 100%;
+}
+.mobile-switcher-item {
+  padding: 8px;
+  font-size: 13px;
 }
 @media (max-width: 690px) {
   .drag-column {
-    margin: 30px 20px;
+    margin: 0px 20px;
+  }
+  .drag-column:not(:first-of-type) {
+    display: none;
+  }
+  .drag-item {
+    margin-left: 0px;
+  }
+  .mobile-switcher {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    min-height: 40px;
+    background: black;
+    color: #fff;
   }
 }
 .drag-column h2 {
@@ -91,8 +114,9 @@ ul {
 
 .drag-inner-list {
   min-height: 50px;
-  /*max-height: 90vh;
-  overflow: auto;*/
+  max-height: 92vh;
+  overflow: auto;
+  margin-right: -20px;
 }
 
 .drag-item {
