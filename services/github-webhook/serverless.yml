@@ -6,6 +6,17 @@ provider:
   runtime: nodejs4.3
   environment:
     GITHUB_WEBHOOK_SECRET: lolz-hi
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:DescribeTable
+      - dynamodb:Query
+      - dynamodb:Scan
+      - dynamodb:GetItem
+      - dynamodb:PutItem
+      - dynamodb:UpdateItem
+      - dynamodb:DeleteItem
+    Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
 functions:
   githubWebhookListener:
@@ -16,3 +27,40 @@ functions:
           method: post
           integration: lambda
           cors: true
+  getAll:
+    handler: handler.getItems
+    events:
+      - http:
+          path: issues
+          method: get
+          integration: lambda
+          cors: true
+          
+resources:
+  Resources:
+    statusBoardOpenIssues:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: status_board_open_issues
+        AttributeDefinitions:
+          - AttributeName: number
+            AttributeType: N
+        KeySchema:
+          - AttributeName: number
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    statusBoardClosedIssues:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: status_board_closed_issues
+        AttributeDefinitions:
+          - AttributeName: number
+            AttributeType: N
+        KeySchema:
+          - AttributeName: number
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
