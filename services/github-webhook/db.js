@@ -3,15 +3,8 @@
  */
 const isEmpty = require('lodash.isempty');
 const awsSDK = require('aws-sdk');
-const dynamoDoc = getDynamoDoc();
+const dynamoDoc = new awsSDK.DynamoDB.DocumentClient();
 const notFoundMsg = '404:Resource not found.';
-
-function getDynamoDoc() {
-  return new awsSDK.DynamoDB.DocumentClient({
-    sessionToken: process.env.AWS_SESSION_TOKEN,
-    region: process.env.AWS_REGION
-  });
-}
 
 function put(params, cb, respondSuffix) {
   const startTime = Date.now();
@@ -86,8 +79,12 @@ function del(params, cb) {
   const startTime = Date.now();
   return dynamoDoc.delete(params, function(err, data) {
     console.log(err, data);
+    if (err) {
+      return cb(err);
+    }
+    console.log('deleted', params)
     if (isEmpty(data)) {
-      return cb(notFoundMsg);
+      return cb(null, data);
     }
     const endTime = Date.now();
     console.log('DB DEL Elapsed time: ' + String(endTime - startTime) + ' milliseconds');
@@ -119,7 +116,7 @@ const db = {
   query: query,
   scan: scan,
   update: update,
-  del: del,
+  delete: del,
   batchGet: batchGet,
   batchWrite: batchWrite
 };
