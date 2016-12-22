@@ -80,7 +80,6 @@ module.exports.githubWebhookListener = (event, context, callback) => {
   // set data to store to DB
   data.number = issue.number
   data.title = issue.title
-
   data.comments = issue.comments
   data.created_at = issue.created_at
   data.updated_at = issue.updated_at
@@ -88,7 +87,6 @@ module.exports.githubWebhookListener = (event, context, callback) => {
   // data.state = issue.state
   // data.html_url = issue.html_url
   // data.milestone = issue.milestone
-  // data.assignees = issue.assignees
 
   if (issue.labels && issue.labels.length) {
     console.log('has labels')
@@ -105,6 +103,19 @@ module.exports.githubWebhookListener = (event, context, callback) => {
     data.labels = issue.labels
   }
 
+  if (issue.assignees && issue.assignees.length) {
+    console.log('has assignees')
+    const assigneeArray = issue.assignees.map(function(assignee, i) {
+      return {
+        login: assignee.login,
+        id: assignee.id,
+      }
+    })
+    data.assignees = assigneeArray
+  } else {
+    data.assignees = []
+  }
+
   if (issue.milestone) {
     data.milestone = {
       number: issue.milestone.number,
@@ -114,7 +125,7 @@ module.exports.githubWebhookListener = (event, context, callback) => {
     console.log('no milestone')
     data.milestone = {}
   }
-  
+
   console.log('data to update', data)
 
   if (issue.state === 'closed' || issue.closed_at) {
