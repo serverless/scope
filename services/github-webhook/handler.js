@@ -9,7 +9,7 @@ function signRequestBody(key, body) {
 module.exports.githubWebhookListener = (event, context, callback) => {
   var errMsg
   const token = process.env.GITHUB_WEBHOOK_SECRET
-  // console.log('token', token)
+  console.log('token', token)
   const headers = event.headers
   // console.log('headers', headers)
   const sig = headers['X-Hub-Signature']

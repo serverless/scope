@@ -6,7 +6,8 @@ provider:
   runtime: nodejs4.3
   region: ${file(./config.prod.json):region}
   environment:
-    GITHUB_WEBHOOK_SECRET: ${file(./config.prod.json):githubSecret}
+    GITHUB_WEBHOOK_SECRET: ${file(./config.prod.json):GITHUB_WEBHOOK_SECRET}
+    GITHUB_API_TOKEN: ${file(./config.prod.json):GITHUB_API_TOKEN}
   iamRoleStatements:
   - Effect: Allow
     Action:
