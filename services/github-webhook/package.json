@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "crypto": "0.0.3",
     "lodash.isempty": "^4.4.0",
     "sync-request": "^3.0.1"
   }
