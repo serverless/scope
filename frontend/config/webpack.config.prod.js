@@ -92,9 +92,14 @@ module.exports = {
         test: /@serverless\/ui-components.*.css$/,
         loaders: ['style-loader', 'css-loader'],
       },
-      {
+      /*{
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style', 'css?importLoaders=1!postcss')
+      },*/
+      {
+        test: /\.css$/,
+        include: paths.appSrc,
+        loader: 'style!css?modules&importLoaders=1&localIdentName=[hash:base64:6]&camelCase!postcss'
       },
       {
         test: /\.json$/,
@@ -147,7 +152,7 @@ module.exports = {
         screw_ie8: true
       }
     }),
-    new ExtractTextPlugin('static/css/[name].[contenthash:8].css'),
+    // new ExtractTextPlugin('static/css/[name].[contenthash:8].css'),
     new ManifestPlugin({
       fileName: 'asset-manifest.json'
     })
