@@ -1,0 +1,124 @@
+.column {
+  flex: 1;
+  margin: 0 10px;
+  position: relative;
+  overflow: hidden;
+  h2 {
+     font-size: 18px;
+     margin: 0;
+     text-align: center;
+     font-weight: 100;
+     width:100%;
+  }
+  .header {
+    background: transparent;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+}
+.cardList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  min-height: 50px;
+  max-height: 92vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-right: -20px;
+  padding-bottom: 50px;
+}
+
+.card {
+  margin: 10px;
+  height: 100px;
+  background: #353535;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  padding: 20px;
+  padding-bottom: 0px;
+  position: relative;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &.hasLabel{
+    padding-left: 35px;
+  }
+  .title, .title a {
+    color: #fff;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 14px;
+    text-decoration:none;
+  }
+}
+
+.assignee {
+  user-select: none;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  .name {
+    margin-left: 5px;
+  }
+  .image {
+    display: flex;
+    align-items: center;
+  }
+  img {
+    border-radius: 50%;
+  }
+}
+
+.milestone {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+}
+
+.label {
+  user-select: none;
+  width: 20px;
+  height: 100%;
+  min-width: 20px;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  font-size: 12px;
+  .inner {
+    white-space: nowrap;
+    /* important */
+    position: absolute;
+    transform: rotate(-90deg) translate(-50%,-100%);
+    transform-origin: 0 0;
+    top: 50%; left: 100%;
+  }
+  .innerText {
+    margin-bottom: 3px;
+  }
+}
+
+.bug {
+  background: #fa8181;
+}
+.help {
+  background: #3FA731;
+}
+
+@media (max-width: 690px) {
+  .column {
+    margin: 0px 20px;
+  }
+  .column:not(:first-of-type) {
+    display: none;
+  }
+  .card {
+    margin-left: 0px;
+    .title, .title a {
+      font-size:16px;
+    }
+  }
+}

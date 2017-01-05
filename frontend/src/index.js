@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Roadmap from './Roadmap';
-import './index.css';
+import StatusBoard from './StatusBoard';
 
-ReactDOM.render(<Roadmap />, document.getElementById('root'));
+ReactDOM.render(<StatusBoard />, document.getElementById('status'));
