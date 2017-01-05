@@ -11,6 +11,33 @@ export default class Column extends Component {
     if (!items) {
       return null
     }
+    /*
+    if the function returns less than zero, sort a before b
+    if the function returns greater than zero, sort b before a
+    if the function returns zero, leave a and b unchanged with respect to each other
+    */
+    // sort here
+    const defaultOrder = items.sort((a, b) => {
+      // put table of contents (TOC) at end of tranforms
+      if(a.milestone && b.milestone) {
+        let A = parseFloat(a.milestone.title)
+        let B = parseFloat(b.milestone.title)
+        if(isNaN(A)) {
+          A = 1000 // no milestone push to end
+        }
+        if(isNaN(B)) {
+          B = 1000 // no milestone push to end
+        }
+        // console.log('a.milestone.title', A)
+        // console.log('b.milestone.title', B)
+        // console.log('-------------')
+        if (A < B) return -1
+        if (A > B) return 1
+      }
+      return 0
+    })
+    console.log('new order', defaultOrder)
+
     return items.map((item, i) => {
       let hasVisibleLabel = false
       // console.log('title', title)
@@ -23,7 +50,7 @@ export default class Column extends Component {
           return (
             <div key={j} className={styles.assignee}>
               <div className={styles.image}>
-                <img role="presentation" src={githubUserImage(person.id, 25)}/>
+                <img role="presentation" src={githubUserImage(person.id, 20)}/>
               </div>
               <div className={styles.name}>
                 {person.login}
@@ -34,9 +61,16 @@ export default class Column extends Component {
       }
       let milestone = item.milestone.title
       if (item.milestone && item.milestone.title) {
+        const mileNumber =item.milestone.number
         milestone = (
           <span className={styles.milestone}>
-            {item.milestone.title}
+            <a
+              title={`View Milestone ${item.milestone.title} on github`}
+              target='_blank'
+              href={`https://github.com/serverless/serverless/milestone/${mileNumber}`}
+            >
+              {item.milestone.title}
+            </a>
           </span>
         )
       }
@@ -93,11 +127,19 @@ export default class Column extends Component {
     })
   }
   render () {
-    const { title } = this.props
+    const { title, items } = this.props
+    let countRender
+    if(items && items.length) {
+      countRender = (
+        <span className={styles.count}>
+          ({items.length})
+        </span>
+      )
+    }
     return (
       <div className={styles.column}>
   			<div className={styles.header}>
-  				<h2>{title}</h2>
+  				<h2><span>{title}</span>{countRender}</h2>
         </div>
   			<ul className={styles.cardList}>
   				{this.renderItems()}

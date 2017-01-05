@@ -9,6 +9,9 @@
      text-align: center;
      font-weight: 100;
      width:100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
   }
   .header {
     background: transparent;
@@ -17,6 +20,12 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px;
+  }
+  .count {
+    font-size: 10px;
+    display: inline-block;
+    margin-left: 5px;
+    color: #9e9e9e;
   }
 }
 .cardList {
@@ -33,7 +42,7 @@
 
 .card {
   margin: 10px;
-  height: 100px;
+  min-height: 100px;
   background: #353535;
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   padding: 20px;
@@ -46,6 +55,9 @@
   &.hasLabel{
     padding-left: 35px;
   }
+  .title {
+    margin-bottom: 10px;
+  }
   .title, .title a {
     color: #fff;
     display: block;
@@ -53,6 +65,7 @@
     overflow: hidden;
     font-size: 14px;
     text-decoration:none;
+    border-bottom: none;
   }
 }
 
@@ -61,8 +74,10 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  margin-top: 10px;
   .name {
     margin-left: 5px;
+    font-size: 13px;
   }
   .image {
     display: flex;
@@ -77,6 +92,12 @@
   position: absolute;
   right: 20px;
   bottom: 10px;
+  font-size: 13px;
+  a {
+    text-decoration:none;
+    border-bottom: none;
+    color: #fff;
+  }
 }
 
 .label {
@@ -97,7 +118,7 @@
     top: 50%; left: 100%;
   }
   .innerText {
-    margin-bottom: 3px;
+
   }
 }
 
@@ -119,6 +140,7 @@
     margin-left: 0px;
     .title, .title a {
       font-size:16px;
+      border-bottom: none;
     }
   }
 }
