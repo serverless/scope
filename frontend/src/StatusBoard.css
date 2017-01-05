@@ -1,0 +1,37 @@
+.container {
+  background: #1a1a1a;
+}
+.list {
+  font-size: 14px;
+  display: flex;
+  align-items: flex-start;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.mobile-switcher {
+  display: none;
+  width: 100%;
+  .item {
+    padding: 8px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 690px) {
+  .list {
+    display: block;
+    max-height: auto !important;
+    overflow: visible;
+  }
+  .mobile-switcher {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    min-height: 40px;
+    background: black;
+    color: #fff;
+  }
+}
