@@ -51,7 +51,10 @@ module.exports = {
     chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     publicPath: publicPath
   },
-  externals: [ {'react': 'window.React' }],
+  externals: [ {
+    'react': 'window.React',
+    'react-dom': 'window.ReactDOM'
+  }],
   resolve: {
     fallback: paths.nodePaths,
     extensions: ['.js', '.json', '.jsx', ''],
