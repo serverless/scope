@@ -1,0 +1,5 @@
+{
+  "region": "us-west-2",
+  "GITHUB_WEBHOOK_SECRET": "xxxxx",
+  "GITHUB_API_TOKEN": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
