@@ -17,15 +17,17 @@ export default class StatusBoard extends Component {
   changeView = (e) => {
     if(!this.columns) return false
     // manage toggling
-    this.columns.forEach((column) => {
-       let id = column.id.replace('status-column-', '')
-       if(e.target.dataset.column === id) {
-         console.log(id)
-         column.style.display = 'block'
-       } else {
-         column.style.display = 'none'
-       }
-    })
+    // No forEach b/c mobile safari doesnt support forEach =(
+    for (var i = 0; i < this.columns.length; i++) {
+      let column = this.columns[i]
+      let id = column.id.replace('status-column-', '')
+      if(e.target.dataset.column === id) {
+        console.log(id)
+        column.style.display = 'block'
+      } else {
+        column.style.display = 'none'
+      }
+    }
   }
   componentDidMount() {
     api.getCompleted().then((items) => {
