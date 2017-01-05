@@ -16,8 +16,7 @@ export default class Column extends Component {
     if the function returns greater than zero, sort b before a
     if the function returns zero, leave a and b unchanged with respect to each other
     */
-    // sort here
-    const defaultOrder = items.sort((a, b) => {
+    return items.sort((a, b) => {
       // put table of contents (TOC) at end of tranforms
       if(a.milestone && b.milestone) {
         let A = parseFloat(a.milestone.title)
@@ -35,10 +34,7 @@ export default class Column extends Component {
         if (A > B) return 1
       }
       return 0
-    })
-    // console.log('new order', defaultOrder)
-
-    return items.map((item, i) => {
+    }).map((item, i) => {
       let hasVisibleLabel = false
       // console.log('title', title)
       // console.log('item', item)
