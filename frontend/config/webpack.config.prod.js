@@ -34,6 +34,8 @@ if (env['process.env'].NODE_ENV !== '"production"') {
   throw new Error('Production builds must have NODE_ENV=production.');
 }
 
+
+
 module.exports = {
   bail: true,
   devtool: 'source-map',
@@ -47,9 +49,9 @@ module.exports = {
     chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     publicPath: publicPath
   },
+  externals: [ {'react': 'window.React' }],
   resolve: {
     fallback: paths.nodePaths,
-
     extensions: ['.js', '.json', '.jsx', ''],
     alias: {
       'react-native': 'react-native-web'

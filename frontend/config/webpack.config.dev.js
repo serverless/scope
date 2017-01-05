@@ -32,7 +32,7 @@ module.exports = {
     root: path.resolve(__dirname),
     extensions: ['.js', '.json', '.jsx', ''],
     alias: {
-      'react-native': 'react-native-web'
+      'react-native': 'react-native-web',
     },
   },
 
@@ -70,6 +70,12 @@ module.exports = {
       },
       {
         test: /@serverless\/ui-components.*.css$/,
+        loaders: ['style-loader', 'css-loader'],
+      },
+      {
+        // *.global.css => global (normal) css
+        test: /\.global\.css$/,
+        include: paths.appSrc,
         loaders: ['style-loader', 'css-loader'],
       },
       {
