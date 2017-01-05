@@ -2,14 +2,16 @@ const crypto = require('crypto')
 const syncRequest = require('sync-request')
 const db = require('./db')
 
-function signRequestBody (key, body) {
-  return 'sha1=' + crypto.createHmac('sha1', key).update(body).digest('hex')
+function signRequestBody(key, body) {
+  return `sha1=${crypto.createHmac('sha1', key).update(body, 'utf-8').digest('hex')}`;
 }
 
 module.exports.githubWebhookListener = (event, context, callback) => {
   var errMsg
   const token = process.env.GITHUB_WEBHOOK_SECRET
+  // console.log('token', token)
   const headers = event.headers
+  // console.log('headers', headers)
   const sig = headers['X-Hub-Signature']
   const githubEvent = headers['X-GitHub-Event']
   const id = headers['X-GitHub-Delivery']
@@ -34,7 +36,8 @@ module.exports.githubWebhookListener = (event, context, callback) => {
     errMsg = '[401] No X-Github-Delivery found on request'
     return callback(new Error(errMsg))
   }
-
+  // console.log('sig', sig)
+  // console.log('calculatedSig', calculatedSig)
   if (sig !== calculatedSig) {
     errMsg = '[401] X-Hub-Signature incorrect. Github webhook token doesn\'t match'
     return callback(new Error(errMsg))
@@ -62,9 +65,11 @@ module.exports.githubWebhookListener = (event, context, callback) => {
     const prData = (issue) ? issue.pull_request : event.body.pull_request
     const issueURL = prData.url.replace(/\/pulls\//, '/issues/')
 
+    const githubAPItoken = process.env.GITHUB_API_TOKEN
     const issueRequest = syncRequest('GET', issueURL, {
       'headers': {
-        'User-Agent': 'davidwells'
+        'User-Agent': 'serverlessbot-2',
+        'Authorization': `token ${githubAPItoken}`
       }
     });
     try {
@@ -199,6 +204,24 @@ module.exports.githubWebhookListener = (event, context, callback) => {
 module.exports.getItems = (event, context, callback) => {
   db.scan({
     TableName: 'status_board_open_issues',
+  }, function(err, items) {
+    if (err) {
+      callback(err);
+    }
+    console.log(items)
+    const addedResponse = {
+      statusCode: 200,
+      body: JSON.stringify({
+        items: items,
+      }),
+    };
+    callback(null, addedResponse);
+  })
+}
+
+module.exports.getCompletedItems = (event, context, callback) => {
+  db.scan({
+    TableName: 'status_board_closed_issues',
   }, function(err, items) {
     if (err) {
       callback(err);

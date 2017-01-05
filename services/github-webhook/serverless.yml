@@ -4,8 +4,9 @@ service: roadmap-github-webhook
 provider:
   name: aws
   runtime: nodejs4.3
+  region: ${file(./config.prod.json):region}
   environment:
-    GITHUB_WEBHOOK_SECRET: lolz-hi
+    GITHUB_WEBHOOK_SECRET: ${file(./config.prod.json):githubSecret}
   iamRoleStatements:
   - Effect: Allow
     Action:
@@ -16,14 +17,14 @@ provider:
       - dynamodb:PutItem
       - dynamodb:UpdateItem
       - dynamodb:DeleteItem
-    Resource: "arn:aws:dynamodb:us-east-1:*:*"
+    Resource: "arn:aws:dynamodb:us-west-2:*:*"
 
 functions:
   githubWebhookListener:
     handler: handler.githubWebhookListener
     events:
       - http:
-          path: api/public
+          path: webhook
           method: post
           integration: lambda
           cors: true
@@ -35,7 +36,15 @@ functions:
           method: get
           integration: lambda
           cors: true
-          
+  getRecentlyCompleted:
+    handler: handler.getCompletedItems
+    events:
+      - http:
+          path: completed
+          method: get
+          integration: lambda
+          cors: true
+
 resources:
   Resources:
     statusBoardOpenIssues:
