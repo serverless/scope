@@ -1,3 +1,4 @@
+var pathModule = require('path')
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -8,6 +9,7 @@ var url = require('url');
 var paths = require('./paths');
 var getClientEnvironment = require('./env');
 var postCSSConfig = require('./postcss.config')
+var AssetsPlugin = require('assets-webpack-plugin')
 
 function ensureSlash(path, needsSlash) {
   var hasSlash = path.endsWith('/');
@@ -128,6 +130,7 @@ module.exports = {
         minifyURLs: true
       }
     }),
+    new AssetsPlugin({path: pathModule.join(__dirname, '../build')}),
     new webpack.DefinePlugin(env),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
