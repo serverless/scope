@@ -20,6 +20,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px;
+    cursor: default;
   }
   .count {
     font-size: 10px;
@@ -57,6 +58,12 @@
   }
   .title {
     margin-bottom: 10px;
+    a {
+      cursor: pointer;
+      &:hover {
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.63);
+      }
+    }
   }
   .title, .title a {
     color: #fff;
@@ -78,6 +85,7 @@
   .name {
     margin-left: 5px;
     font-size: 13px;
+    cursor: default;
   }
   .image {
     display: flex;
@@ -97,6 +105,10 @@
     text-decoration:none;
     border-bottom: none;
     color: #fff;
+    cursor: pointer;
+    &:hover {
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.63);
+    }
   }
 }
 
@@ -108,7 +120,9 @@
   position: absolute;
   left: 0;
   top: 0px;
-  font-size: 12px;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  cursor: default;
   .inner {
     white-space: nowrap;
     /* important */

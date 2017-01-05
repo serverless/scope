@@ -3,21 +3,6 @@ import Column from './components/Column/Column'
 import styles from './StatusBoard.css'
 import api from './utils/api'
 
-/*
-// Create a new JavaScript Date object based on the timestamp
-// multiplied by 1000 so that the argument is in milliseconds, not seconds.
-var date = new Date(unix_timestamp*1000);
-// Hours part from the timestamp
-var hours = date.getHours();
-// Minutes part from the timestamp
-var minutes = "0" + date.getMinutes();
-// Seconds part from the timestamp
-var seconds = "0" + date.getSeconds();
-
-// Will display time in 10:30:23 format
-var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-*/
-
 export default class StatusBoard extends Component {
   constructor (props, context) {
     super(props, context)
@@ -27,9 +12,20 @@ export default class StatusBoard extends Component {
       codingItems: [],
       reviewingItems: [],
     }
+    this.columns = null
   }
   changeView = (e) => {
-    console.log(e.target.dataset)
+    if(!this.columns) return false
+    // manage toggling
+    this.columns.forEach((column) => {
+       let id = column.id.replace('status-column-', '')
+       if(e.target.dataset.column === id) {
+         console.log(id)
+         column.style.display = 'block'
+       } else {
+         column.style.display = 'none'
+       }
+    })
   }
   componentDidMount() {
     api.getCompleted().then((items) => {
@@ -40,6 +36,8 @@ export default class StatusBoard extends Component {
     api.getOpenIssues().then((sortedItems) => {
       this.setState(sortedItems)
     })
+    // set columns for mobile toggling
+    this.columns = document.querySelectorAll('.status-board-column')
   }
   render() {
     const {
@@ -52,11 +50,11 @@ export default class StatusBoard extends Component {
     return (
       <div className={styles.container}>
         <div className={styles.list}>
-          <Column title='discussing' items={discussingItems} />
-          <Column title='waiting' items={waitingItems} />
-          <Column title='coding' items={codingItems} />
-          <Column title='reviewing' items={reviewingItems} />
-          <Column title='recently completed' items={completedItems} />
+          <Column id="1" title='discussing' items={discussingItems} />
+          <Column id="2" title='waiting' items={waitingItems} />
+          <Column id="3" title='coding' items={codingItems} />
+          <Column id="4" title='reviewing' items={reviewingItems} />
+          <Column id="5" title='recently completed' items={completedItems} />
         </div>
         <div className={styles.mobileSwitcher}>
             <span
@@ -100,3 +98,17 @@ export default class StatusBoard extends Component {
   }
 }
 
+/*
+// Create a new JavaScript Date object based on the timestamp
+// multiplied by 1000 so that the argument is in milliseconds, not seconds.
+var date = new Date(unix_timestamp*1000);
+// Hours part from the timestamp
+var hours = date.getHours();
+// Minutes part from the timestamp
+var minutes = "0" + date.getMinutes();
+// Seconds part from the timestamp
+var seconds = "0" + date.getSeconds();
+
+// Will display time in 10:30:23 format
+var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+*/

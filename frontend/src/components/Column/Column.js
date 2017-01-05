@@ -36,7 +36,7 @@ export default class Column extends Component {
       }
       return 0
     })
-    console.log('new order', defaultOrder)
+    // console.log('new order', defaultOrder)
 
     return items.map((item, i) => {
       let hasVisibleLabel = false
@@ -127,7 +127,7 @@ export default class Column extends Component {
     })
   }
   render () {
-    const { title, items } = this.props
+    const { title, items, id } = this.props
     let countRender
     if(items && items.length) {
       countRender = (
@@ -137,7 +137,10 @@ export default class Column extends Component {
       )
     }
     return (
-      <div className={styles.column}>
+      <div
+        id={`status-column-${id}`}
+        className={styles.column + ' status-board-column'}
+      >
   			<div className={styles.header}>
   				<h2><span>{title}</span>{countRender}</h2>
         </div>
