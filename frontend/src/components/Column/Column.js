@@ -11,13 +11,8 @@ export default class Column extends Component {
     if (!items) {
       return null
     }
-    /*
-    if the function returns less than zero, sort a before b
-    if the function returns greater than zero, sort b before a
-    if the function returns zero, leave a and b unchanged with respect to each other
-    */
+    // sort and render
     return items.sort((a, b) => {
-      // put table of contents (TOC) at end of tranforms
       if(a.milestone && b.milestone) {
         let A = parseFloat(a.milestone.title)
         let B = parseFloat(b.milestone.title)
@@ -36,8 +31,6 @@ export default class Column extends Component {
       return 0
     }).map((item, i) => {
       let hasVisibleLabel = false
-      // console.log('title', title)
-      // console.log('item', item)
       let assigneeRender
       if (item.assignees && item.assignees.length) {
         // console.log('assignee', item.assignees)
@@ -138,7 +131,9 @@ export default class Column extends Component {
         className={styles.column + ' status-board-column'}
       >
   			<div className={styles.header}>
-  				<h2><span>{title}</span>{countRender}</h2>
+  				<h2>
+            <span>{title}</span>{countRender}
+          </h2>
         </div>
   			<ul className={styles.cardList}>
   				{this.renderItems()}
