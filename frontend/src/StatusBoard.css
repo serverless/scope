@@ -10,6 +10,41 @@
   max-height: 100vh;
   overflow: hidden;
 }
+.options {
+  padding: 20px;
+  position: absolute;
+  right: 0;
+  top: 28px;
+  width: 520px;
+  background: #000;
+  color: #fff;
+  font-size: 13px;
+  user-select: none;
+  .section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    &:last-of-type {
+      margin-bottom:0px;
+    }
+  }
+  .header {
+    font-size: 17px;
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 100px;
+  }
+  .option {
+    color: #a8a7a7;
+    padding: 3px 8px;
+    margin: 5px;
+    border: 1px solid;
+    font-size: 12px;
+    &:hover, &.activeClass {
+      color: #fff;
+    }
+  }
+}
 .svg {
   position: absolute;
   z-index: 9;

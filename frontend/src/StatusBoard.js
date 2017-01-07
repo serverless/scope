@@ -10,7 +10,8 @@ export default class StatusBoard extends Component {
   constructor (props, context) {
     super(props, context)
     this.state = {
-      config: initialConfig
+      config: initialConfig,
+      showOptions: false
     }
     this.columnNodes = null
   }
@@ -105,22 +106,71 @@ export default class StatusBoard extends Component {
     }
     return mobileToggles
   }
-  changeIt = () => {
-    const newConfig = { ...initialConfig, ...{ recentlyCompleted: false}}
+  changeSetting = (e) => {
+    let updatedOptions = {}
+    const setting = e.target.parentNode.dataset.setting
+    let value = e.target.dataset.value
+    if (value === 'false') {
+      value = false
+    }
+    // console.log('setting', setting)
+    // console.log('settingValue', value)
+    updatedOptions[setting] = value
     this.setState({
-      config: newConfig
+      config: { ...this.state.config, ...updatedOptions }
     })
   }
   toggleSetting = () => {
-    alert('settings coming soon')
+    this.setState({
+      showOptions: !this.state.showOptions
+    })
   }
   render() {
-    // <button onClick={this.changeIt}>Change config</button>
+    const { showOptions } = this.state
+    const showMenu = (showOptions) ? 'block' : 'none'
     const bgColor = initialConfig.theme.backgroundColor
     return (
       <div className={styles.container} style={{backgroundColor: bgColor}}>
-        <div className={styles.svg} onClick={this.toggleSetting}>
-          <GearIcon />
+        <div className={styles.svg}>
+          <span onClick={this.toggleSetting}><GearIcon  /></span>
+          <div className={styles.options} style={{display: showMenu}}>
+            <div className={styles.section} data-setting='sortMilestonesFirst'>
+              <div className={styles.header}>Milestones:</div>
+              <div className={styles.option} onClick={this.changeSetting} data-value='true'>
+                On Top
+              </div>
+              <div className={styles.option} onClick={this.changeSetting} data-value='false'>
+                Mixed
+              </div>
+            </div>
+            <div className={styles.section} data-setting='sortBy'>
+              <div className={styles.header}>Sort by:</div>
+              <div className={styles.option} onClick={this.changeSetting} data-value='created_at'>
+                Creation Date
+              </div>
+              <div className={styles.option} onClick={this.changeSetting} data-value='updated_at'>
+                Last updated date
+              </div>
+              <div className={styles.option} onClick={this.changeSetting} data-value='comments'>
+                Comment count
+              </div>
+            </div>
+            <div className={styles.section} data-setting='sortOrder'>
+              <div className={styles.header}>Sort order:</div>
+              <div
+                className={styles.option}
+                onClick={this.changeSetting}
+                data-value='desc'>
+                Descending ▼
+              </div>
+              <div
+                className={styles.option}
+                onClick={this.changeSetting}
+                data-value='asc'>
+                Ascending ▲
+              </div>
+            </div>
+          </div>
         </div>
         <div ref='columnList' className={styles.list}>
           {this.renderColumns()}
