@@ -65,6 +65,7 @@
   "dependencies": {
     "@serverless/ui-components": "0.0.7",
     "axios": "^0.15.3",
+    "lodash.debounce": "^4.0.8",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
   },

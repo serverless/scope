@@ -143,6 +143,12 @@
   background: #3FA731;
 }
 
+@media (max-width: 1130px) {
+  .column {
+    margin: 0 2px;
+  }
+}
+
 @media (max-width: 690px) {
   .column {
     margin: 0px 20px;

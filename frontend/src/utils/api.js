@@ -1,13 +1,14 @@
 import axios from 'axios'
 import sortIssues from './sort'
-
-const BASE = 'https://kouf9xf85f.execute-api.us-west-2.amazonaws.com'
-const COMPLETED_ENDPOINT = `${BASE}/dev/completed`
-const OPEN_ENDPOINT = `${BASE}/dev/issues`
+import config from '../config'
 
 const api = {
   getCompleted: function (username) {
-    return axios.get(COMPLETED_ENDPOINT).then((response) => {
+    if (!config.api && config.api.completed) {
+      console.log('No completed endpoint found in config.api.completed')
+      return Promise.resolve([])
+    }
+    return axios.get(config.api.completed).then((response) => {
       const body = JSON.parse(response.data.body)
       return body.items
     }).catch((err) => {
@@ -16,9 +17,13 @@ const api = {
     })
   },
   getOpenIssues: function (username) {
-    return axios.get(OPEN_ENDPOINT).then((response) => {
+    if (!config.api && config.api.open) {
+      console.log('No open endpoint found in config.api.open')
+      return Promise.resolve([])
+    }
+    return axios.get(config.api.open).then((response) => {
       const body = JSON.parse(response.data.body)
-      return sortIssues(body.items)
+      return sortIssues(body.items, config.columns)
     }).catch((err) => {
       console.log(err)
       return []

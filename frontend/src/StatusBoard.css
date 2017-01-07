@@ -1,7 +1,7 @@
 
 .container {
-  background: #1a1a1a;
   line-height: 22.8px;
+  position: relative;
 }
 .list {
   font-size: 14px;
@@ -9,6 +9,18 @@
   align-items: flex-start;
   max-height: 100vh;
   overflow: hidden;
+}
+.svg {
+  position: absolute;
+  z-index: 9;
+  width: 25px;
+  height: 25px;
+  right: 20px;
+  top: 10px;
+  cursor: pointer;
+  svg {
+    fill: #fff;
+  }
 }
 
 .mobile-switcher {

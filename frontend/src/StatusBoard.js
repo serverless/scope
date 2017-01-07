@@ -1,35 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import debounce from 'lodash.debounce'
 import Column from './components/Column/Column'
-import styles from './StatusBoard.css'
 import api from './utils/api'
+import initialConfig from './config'
+import GearIcon from './components/Gear/Gear'
+import styles from './StatusBoard.css'
 
 export default class StatusBoard extends Component {
   constructor (props, context) {
     super(props, context)
     this.state = {
-      discussingItems: [],
-      waitingItems: [],
-      codingItems: [],
-      reviewingItems: [],
+      config: initialConfig
     }
-    this.columns = null
-  }
-  changeView = (e) => {
-    if(!this.columns) return false
-    // manage toggling
-    // No forEach b/c mobile safari doesnt support forEach =(
-    for (var i = 0; i < this.columns.length; i++) {
-      let column = this.columns[i]
-      let id = column.id.replace('status-column-', '')
-      if(e.target.dataset.column === id) {
-        console.log(id)
-        column.style.display = 'block'
-      } else {
-        column.style.display = 'none'
-      }
-    }
+    this.columnNodes = null
   }
   componentDidMount() {
+    // Call API for issue data
     api.getCompleted().then((items) => {
       this.setState({
         completedItems: items,
@@ -38,79 +24,111 @@ export default class StatusBoard extends Component {
     api.getOpenIssues().then((sortedItems) => {
       this.setState(sortedItems)
     })
-    // set columns for mobile toggling
-    this.columns = document.querySelectorAll('.status-board-column')
+    // get columns Nodes for mobile toggling
+    this.columnNodes = this.refs.columnList.querySelectorAll('.serverless-status-column')
+    // Set debounced resize listener
+    this.resizeFunction = debounce(this.handleDesktopResize, 100)
+    window.addEventListener('resize', this.resizeFunction)
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resizeFunction)
+  }
+  changeView = (e) => {
+    this.columnNodes.forEach((column) => {
+      let id = column.id.replace('serverless-status-column-', '')
+      let toggle = (e.target.dataset.column === id) ? 'block' : 'none'
+      column.style.display = toggle
+    })
+  }
+  handleDesktopResize = (e) => {
+    if (window.outerWidth > 670) {
+      this.columnNodes.forEach((column) => {
+        column.style.display = 'block'
+      })
+    }
+  }
+  renderColumns() {
+    const { completedItems, config } = this.state
+    let columns = config.columns.map((column, i) => {
+      return (
+        <Column
+          sortMilestonesFirst={config.sortMilestonesFirst}
+          sortOrder={config.sortOrder}
+          sortBy={config.sortBy}
+          key={i}
+          id={i}
+          title={column.title}
+          items={this.state[column.title]}
+        />
+      )
+    })
+    if (config.recentlyCompleted && config.recentlyCompleted.show) {
+      columns.push(
+        <Column
+          sortMilestonesFirst={config.sortMilestonesFirst}
+          sortOrder={config.sortOrder}
+          sortBy={config.sortBy}
+          key={config.columns.length}
+          id={config.columns.length}
+          title='recently completed'
+          items={completedItems}
+        />
+      )
+    }
+    return columns
+  }
+  renderMobileToggles () {
+    const { config } = this.state
+    let mobileToggles = config.columns.map((column, i) => {
+      return (
+        <span
+          key={i}
+          data-column={i}
+          onClick={this.changeView}
+          className={styles.item}
+        >
+         {column.mobileToggleTitle}
+        </span>
+      )
+    })
+    if (config.recentlyCompleted && config.recentlyCompleted.show) {
+      mobileToggles.push(
+        <span
+          key={config.columns.length}
+          data-column={config.columns.length}
+          onClick={this.changeView}
+          className={styles.item}
+        >
+          Completed
+        </span>
+      )
+    }
+    return mobileToggles
+  }
+  changeIt = () => {
+    const newConfig = { ...initialConfig, ...{ recentlyCompleted: false}}
+    this.setState({
+      config: newConfig
+    })
+  }
+  toggleSetting = () => {
+    alert('settings coming soon')
   }
   render() {
-    const {
-      discussingItems,
-      waitingItems,
-      codingItems,
-      reviewingItems,
-      completedItems
-    } = this.state
+    // <button onClick={this.changeIt}>Change config</button>
+    const bgColor = initialConfig.theme.backgroundColor
     return (
-      <div className={styles.container}>
-        <div className={styles.list}>
-          <Column id="1" title='discussing' items={discussingItems} />
-          <Column id="2" title='waiting' items={waitingItems} />
-          <Column id="3" title='coding' items={codingItems} />
-          <Column id="4" title='reviewing' items={reviewingItems} />
-          <Column id="5" title='recently completed' items={completedItems} />
+      <div className={styles.container} style={{backgroundColor: bgColor}}>
+        <div className={styles.svg} onClick={this.toggleSetting}>
+          <GearIcon />
+        </div>
+        <div ref='columnList' className={styles.list}>
+          {this.renderColumns()}
         </div>
         <div className={styles.mobileSwitcher}>
-            <span
-              data-column="1"
-              onClick={this.changeView}
-              className={styles.item}
-            >
-              Discussing
-            </span>
-            <span
-              data-column="2"
-              onClick={this.changeView}
-              className={styles.item}
-            >
-              Waiting
-            </span>
-            <span
-              data-column="3"
-              onClick={this.changeView}
-              className={styles.item}
-            >
-              Coding
-            </span>
-            <span
-              data-column="4"
-              onClick={this.changeView}
-              className={styles.item}
-            >
-              Reviewing
-            </span>
-            <span
-              data-column="5"
-              onClick={this.changeView}
-              className={styles.item}
-            >
-              Completed
-            </span>
+          {this.renderMobileToggles()}
         </div>
       </div>
     );
   }
 }
-
-/*
-// Create a new JavaScript Date object based on the timestamp
-// multiplied by 1000 so that the argument is in milliseconds, not seconds.
-var date = new Date(unix_timestamp*1000);
-// Hours part from the timestamp
-var hours = date.getHours();
-// Minutes part from the timestamp
-var minutes = "0" + date.getMinutes();
-// Seconds part from the timestamp
-var seconds = "0" + date.getSeconds();
-
-// Will display time in 10:30:23 format
-var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-*/
