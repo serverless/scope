@@ -19,7 +19,7 @@ module.exports = {
   // Set column sort order. 'asc' or 'desc'
   sortOrder: 'desc',
   // Milestones at top of column
-  sortMilestonesFirst: false,
+  sortMilestonesFirst: true,
   // configure columns
   columns: [
     {
