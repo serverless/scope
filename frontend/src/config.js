@@ -15,7 +15,7 @@ module.exports = {
     timeRange: 'xyz'
   },
   // Set column sort order. 'updated_at', 'created_at', 'comments'
-  sortBy: 'comments',
+  sortBy: 'updated_at',
   // Set column sort order. 'asc' or 'desc'
   sortOrder: 'desc',
   // Milestones at top of column
@@ -33,13 +33,13 @@ module.exports = {
         'status/needs-attention'
       ],
     },
-    {
-      title: "question",
-      mobileToggleTitle: "question",
-      githubTags: [
-        'kind/question',
-      ]
-    },
+    // {
+    //   title: "question",
+    //   mobileToggleTitle: "question",
+    //   githubTags: [
+    //     'kind/question',
+    //   ]
+    // },
     {
       title: "waiting",
       mobileToggleTitle: "Waiting",
