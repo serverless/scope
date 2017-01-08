@@ -1,20 +1,28 @@
-## Custom Roadmap Application
+## Open Source Status Board
 
-![roadmap2](https://cloud.githubusercontent.com/assets/532272/21120332/991edc10-c07b-11e6-9c18-2bc425f87da2.png)
+Open source kan-ban like view of your open source project.
 
-## Specs
+## Features
 
-* Use labels to indicate status, bugs and help-wanted, that's all.
-* Write a Lambda that re-populates a dynamoDB table every 5 minutes with Github issues by label, via the Github API.
-* Write another Lambda with a REST API endpoint which you can use to fetch issues by label.
-* Build a front-end Github Project/Trello/Kanban app that exists on our website and displays everything.
-* The road map will auto-update every 5 minutes according to whatever labels are on issues, and everything will be put into the appropriate column.
-* The items in each column should be sorted by milestone. Later or no milestone issues should be pushed to the bottom.
+- Customize Columns
+- Customize Sort
 
-## Future wishlist
+## Options here
 
-* The voting feature in the mock-up should not be implemented at this time.
+## Running the Backend
+
+1. Rename `config.prod.example.json` to `config.prod.json`
+2. Add github tokens
+3. Deploy from `/services/` directory
+
+```
+sls deploy
+```
 
 ## Running the Frontend
 
 `cd frontend && npm start`
+
+## Future wishlist
+
+* The voting feature in the mock-up should not be implemented at this time.

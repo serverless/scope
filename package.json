@@ -1,7 +1,7 @@
 {
-  "name": "roadmap",
+  "name": "serverless-status-board",
   "version": "1.0.0",
-  "description": "Custom Roadmap Application",
+  "description": "Open Source Serverless Status Board for custom views of open issues and PRs in your repo",
   "main": "index.js",
   "scripts": {},
   "author": "",
