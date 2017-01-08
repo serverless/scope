@@ -35,11 +35,18 @@ export default class StatusBoard extends Component {
     window.removeEventListener('resize', this.resizeFunction)
   }
   changeView = (e) => {
-    this.columnNodes.forEach((column) => {
+    // mobile safari choking on forEach
+    // this.columnNodes.forEach((column) => {
+    //   let id = column.id.replace('serverless-status-column-', '')
+    //   let toggle = (e.target.dataset.column === id) ? 'block' : 'none'
+    //   column.style.display = toggle
+    // })
+    for (var i = 0; i < this.columnNodes.length; i++) {
+      const column = this.columnNodes[i]
       let id = column.id.replace('serverless-status-column-', '')
       let toggle = (e.target.dataset.column === id) ? 'block' : 'none'
       column.style.display = toggle
-    })
+    }
   }
   handleDesktopResize = (e) => {
     if (window.outerWidth > 670) {
@@ -53,7 +60,7 @@ export default class StatusBoard extends Component {
     let columns = config.columns.map((column, i) => {
       return (
         <Column
-          sortMilestonesFirst={config.sortMilestonesFirst}
+          stickyMilestones={config.stickyMilestones}
           sortOrder={config.sortOrder}
           sortBy={config.sortBy}
           key={i}
@@ -66,7 +73,7 @@ export default class StatusBoard extends Component {
     if (config.recentlyCompleted && config.recentlyCompleted.show) {
       columns.push(
         <Column
-          sortMilestonesFirst={config.sortMilestonesFirst}
+          stickyMilestones={config.stickyMilestones}
           sortOrder={config.sortOrder}
           sortBy={config.sortBy}
           key={config.columns.length}
@@ -108,10 +115,15 @@ export default class StatusBoard extends Component {
   }
   changeSetting = (e) => {
     let updatedOptions = {}
-    const setting = e.target.parentNode.dataset.setting
+    let setting = e.target.parentNode.dataset.setting
     let value = e.target.dataset.value
     if (value === 'false') {
       value = false
+    }
+    if (value === 'milestone') {
+      // set sort to milestone at top
+      setting = 'stickyMilestones'
+      value = true
     }
     // console.log('setting', setting)
     // console.log('settingValue', value)
@@ -133,41 +145,51 @@ export default class StatusBoard extends Component {
       <div className={styles.container} style={{backgroundColor: bgColor}}>
         <div className={styles.svg}>
           <span onClick={this.toggleSetting}><GearIcon  /></span>
-          <div className={styles.options} style={{display: showMenu}}>
-            <div className={styles.section} data-setting='sortMilestonesFirst'>
-              <div className={styles.header}>Milestones:</div>
-              <div className={styles.option} onClick={this.changeSetting} data-value='true'>
-                On Top
-              </div>
-              <div className={styles.option} onClick={this.changeSetting} data-value='false'>
-                Mixed
-              </div>
-            </div>
-            <div className={styles.section} data-setting='sortBy'>
+          <div className={styles.settings} style={{display: showMenu}}>
+
+            <div className={styles.section}>
               <div className={styles.header}>Sort by:</div>
-              <div className={styles.option} onClick={this.changeSetting} data-value='created_at'>
-                Creation Date
-              </div>
-              <div className={styles.option} onClick={this.changeSetting} data-value='updated_at'>
-                Last updated date
-              </div>
-              <div className={styles.option} onClick={this.changeSetting} data-value='comments'>
-                Comment count
+              <div className={styles.options} data-setting='sortBy'>
+                <div className={styles.option} onClick={this.changeSetting} data-value='created_at'>
+                  Creation Date
+                </div>
+                <div className={styles.option} onClick={this.changeSetting} data-value='updated_at'>
+                  Last updated date
+                </div>
+                <div className={styles.option} onClick={this.changeSetting} data-value='comments'>
+                  Comment count
+                </div>
+                {/*<div className={styles.option} onClick={this.changeSetting} data-value='milestone'>
+                  Milestone
+                </div>*/}
               </div>
             </div>
-            <div className={styles.section} data-setting='sortOrder'>
+            <div className={styles.section}>
               <div className={styles.header}>Sort order:</div>
-              <div
-                className={styles.option}
-                onClick={this.changeSetting}
-                data-value='desc'>
-                Descending ▼
+              <div className={styles.options} data-setting='sortOrder'>
+                <div
+                  className={styles.option}
+                  onClick={this.changeSetting}
+                  data-value='desc'>
+                  Descending ▼
+                </div>
+                <div
+                  className={styles.option}
+                  onClick={this.changeSetting}
+                  data-value='asc'>
+                  Ascending ▲
+                </div>
               </div>
-              <div
-                className={styles.option}
-                onClick={this.changeSetting}
-                data-value='asc'>
-                Ascending ▲
+            </div>
+            <div className={styles.section}>
+              <div className={styles.header}>Milestones:</div>
+              <div className={styles.options} data-setting='stickyMilestones'>
+                <div className={styles.option} onClick={this.changeSetting} data-value='true'>
+                  Milestones on top
+                </div>
+                <div className={styles.option} onClick={this.changeSetting} data-value='false'>
+                  Mixed
+                </div>
               </div>
             </div>
           </div>

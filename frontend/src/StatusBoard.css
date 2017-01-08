@@ -10,29 +10,31 @@
   max-height: 100vh;
   overflow: hidden;
 }
-.options {
-  padding: 20px;
+.settings {
+  padding: 15px;
   position: absolute;
   right: 0;
   top: 28px;
-  width: 520px;
+  width: 300px;
   background: #000;
   color: #fff;
   font-size: 13px;
   user-select: none;
   .section {
-    display: flex;
-    align-items: center;
     margin-bottom: 10px;
     &:last-of-type {
       margin-bottom:0px;
     }
   }
   .header {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: bold;
-    margin-right: 10px;
-    min-width: 100px;
+    margin-left: 5px;
+  }
+  .options {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
   }
   .option {
     color: #a8a7a7;
@@ -72,6 +74,9 @@
     display: block;
     max-height: auto !important;
     overflow: visible;
+  }
+  .settings {
+    width: 86vw;
   }
   .mobile-switcher {
     display: flex;

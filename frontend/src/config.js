@@ -14,12 +14,12 @@ module.exports = {
     show: true,
     timeRange: 'xyz'
   },
-  // Set column sort order. 'updated_at', 'created_at', 'comments'
+  // Set column sort order. 'updated_at', 'created_at', 'comments', 'milestone'
   sortBy: 'updated_at',
   // Set column sort order. 'asc' or 'desc'
   sortOrder: 'desc',
-  // Milestones at top of column
-  sortMilestonesFirst: true,
+  // Keep Milestones at top of column
+  stickyMilestones: true,
   // configure columns
   columns: [
     {

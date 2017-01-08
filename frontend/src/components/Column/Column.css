@@ -1,3 +1,7 @@
+$iconSize: 20px;
+$metaFontSize: 12px;
+$metaSpacer: 10px;
+$iconSpacer: 5px;
 .column {
   flex: 1;
   margin: 0 10px;
@@ -61,9 +65,6 @@
     margin-bottom: 10px;
     a {
       cursor: pointer;
-      &:hover {
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.63);
-      }
     }
   }
   .title, .title a {
@@ -77,23 +78,67 @@
   }
 }
 
-.assignee {
-  user-select: none;
+.assigneeContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 22px;
+}
+.leftMeta {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
   margin-top: 10px;
+  flex-wrap: wrap;
+  &.hasMilestone {
+    align-items: flex-end;
+    max-width: 85%;
+  }
+}
+.multiplePeople {
+  margin-bottom: 5px;
+  &:last-of-type {
+    margin-bottom: 2px;
+  }
+}
+.assignee {
+  user-select: none;
+  display: flex;
+  align-items: center;
+  margin-right: $metaSpacer;
   .name {
-    margin-left: 5px;
-    font-size: 13px;
+    margin-left: $iconSpacer;
+    font-size: $metaFontSize;
     cursor: default;
+    line-height: 16px;
   }
   .image {
     display: flex;
     align-items: center;
   }
   img {
+    height: $iconSize;
+    width: $iconSize;
     border-radius: 50%;
+  }
+}
+a.commentLink {
+  color: #fff;
+  text-decoration:none;
+  border-bottom: none;
+}
+.comment {
+  display: flex;
+  margin-right: $metaSpacer;
+  .commentIcon {
+    height: $iconSize;
+    width: $iconSize;
+    svg {
+      fill: #fff;
+    }
+  }
+  .commentCount {
+    margin-left: 3px;
+    font-size: $metaFontSize;
   }
 }
 
@@ -101,15 +146,29 @@
   position: absolute;
   right: 20px;
   bottom: 10px;
-  font-size: 13px;
+  font-size: $metaFontSize;
   a {
+    display:flex;
+    align-items: center;
     text-decoration:none;
     border-bottom: none;
     color: #fff;
     cursor: pointer;
-    &:hover {
-      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.63);
+  }
+  .milestoneIcon {
+    height: 14px;
+    width: 14px;
+    overflow: hidden;
+    margin-top: -5px;
+    margin-right: 0px;
+    svg {
+      fill: #fff;
+      height: 14px;
+      width: 14px;
     }
+  }
+  .milestoneNumber {
+    margin-left: 3px;
   }
 }
 

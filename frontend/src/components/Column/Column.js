@@ -1,7 +1,9 @@
 import React, {Component, PropTypes} from 'react'
-import styles from './Column.css'
+import CommentIcon from '../Comment/Comment'
+import MilestoneIcon from '../Milestone/Milestone'
 import config from '../../config'
 import { githubIssueURL, githubUserImage } from '../../utils/github-urls'
+import styles from './Column.css'
 
 const propTypes = {
   children: PropTypes.any
@@ -49,7 +51,7 @@ function sortMileStones(a, b) {
 
 export default class Column extends Component {
   renderItems() {
-    const { items, sortOrder, sortBy, sortMilestonesFirst } = this.props
+    const { items, sortOrder, sortBy, stickyMilestones } = this.props
     if (!items) {
       return null
     }
@@ -65,7 +67,7 @@ export default class Column extends Component {
 
     let columnItems = items
 
-    if (sortMilestonesFirst) {
+    if (stickyMilestones) {
       const milestoneItems = items.filter((item) => {
          return item.milestone && item.milestone.title
       }).sort(order).sort(sortMileStones)
@@ -80,15 +82,16 @@ export default class Column extends Component {
 
     // sort and render
     return columnItems.map((item, i) => {
-
+      const githubURL = githubIssueURL(item.number, config.repo)
       let hasVisibleLabel = false
       let assigneeRender
       if (item.assignees && item.assignees.length) {
         // console.log('assignee', item.assignees)
-        assigneeRender = item.assignees.map((person, j) => {
+        const spacing = (item.assignees.length > 1) ? styles.multiplePeople : ''
+        const assigneeDivs = item.assignees.map((person, j) => {
           // console.log(person)
           return (
-            <div key={j} className={styles.assignee}>
+            <div key={j} className={styles.assignee + ' ' + spacing}>
               <div className={styles.image}>
                 <img role="presentation" src={githubUserImage(person.id, 20)}/>
               </div>
@@ -98,18 +101,31 @@ export default class Column extends Component {
             </div>
           )
         })
+        assigneeRender = (
+          <div className={styles.assigneeContainer}>
+            {assigneeDivs}
+          </div>
+        )
       }
+      let hasMilestoneClass
       let milestone = item.milestone.title
       if (item.milestone && item.milestone.title) {
+        hasMilestoneClass = styles.hasMilestone
         const mileNumber =item.milestone.number
         milestone = (
           <span className={styles.milestone}>
             <a
+              className={styles.milestoneLink}
               title={`View Milestone ${item.milestone.title} on github`}
               target='_blank'
               href={`https://github.com/${config.repo}/milestone/${mileNumber}`}
             >
+             <div className={styles.milestoneIcon}>
+              <MilestoneIcon />
+             </div>
+             <div className={styles.milestoneNumber}>
               {item.milestone.title}
+             </div>
             </a>
           </span>
         )
@@ -145,6 +161,26 @@ export default class Column extends Component {
           }
         })
       }
+      let commentRender
+      if (item.comments) {
+        commentRender =(
+          <a
+            className={styles.commentLink}
+            title={`${item.comments} comments on github`}
+            target='_blank'
+            href={githubURL}
+          >
+          <div className={styles.comment}>
+              <div className={styles.commentIcon}>
+                <CommentIcon />
+              </div>
+              <div className={styles.commentCount}>
+                {item.comments}
+              </div>
+          </div>
+          </a>
+        )
+      }
 
       var updatedTimestamp = new Date(item.updated_at).getTime();
       var createdTimeStamp = new Date(item.created_at).getTime();
@@ -157,7 +193,6 @@ export default class Column extends Component {
       )
       debugInfo = null
       const visibleLabelClass = (hasVisibleLabel) ? styles.hasLabel : ''
-      const githubURL = githubIssueURL(item.number, config.repo)
       return(
         <li key={i} className={styles.card + ' ' + visibleLabelClass}>
           {tag}
@@ -171,7 +206,10 @@ export default class Column extends Component {
               {item.title}
             </a>
           </div>
+          <div className={styles.leftMeta + ' ' + hasMilestoneClass}>
           {assigneeRender}
+          {commentRender}
+          </div>
           {milestone}
         </li>
       )
