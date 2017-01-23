@@ -125,11 +125,5 @@
         "diff_url": "https://github.com/serverless/serverless/pull/2922.diff",
         "patch_url": "https://github.com/serverless/serverless/pull/2922.patch"
     },
-    "body": "## What did you implement:
-
-        Closes #2846
-
-Add service wide metrics support via `serverless metrics` command.
-
-## How did you implement it:"
+    "body": "## Text in body"
 }
