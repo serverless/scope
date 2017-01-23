@@ -1,13 +1,32 @@
+# 'service' is the name of the service
+service: ${self:custom.repoName}-status-board
 
-service: roadmap-github-webhook
+# 'custom' is a place to define custom variables used elsewhere in the yaml config
+custom:
+  repoName: lolz
+  defaultStage: prod
+  currentStage: ${opt:stage, self:custom.defaultStage}
+  currentRegion: ${file(./config.${self:custom.currentStage}.json):region}
+  openItemsTable: ${self:custom.repoName}-${self:custom.currentStage}-open-items
+  closedItemsTable: ${self:custom.repoName}-${self:custom.currentStage}-closed-items
 
+# 'provider' specifies where to deploy the service. Aka deploy to 'aws'
 provider:
   name: aws
   runtime: nodejs4.3
-  region: ${file(./config.prod.json):region}
+  # ${self:custom.currentRegion} references the 'custom' field in this file
+  # it grabs the 'currentRegion' key and places it in the 'region' key defined below
+  region: ${self:custom.currentRegion}
+  stage: ${self:custom.currentStage}
+  # 'environment' is where you define any process.env environment variables needed in code
   environment:
-    GITHUB_WEBHOOK_SECRET: ${file(./config.prod.json):GITHUB_WEBHOOK_SECRET}
-    GITHUB_API_TOKEN: ${file(./config.prod.json):GITHUB_API_TOKEN}
+    GITHUB_WEBHOOK_SECRET: ${file(./config.${self:custom.currentStage}.json):GITHUB_WEBHOOK_SECRET}
+    GITHUB_API_TOKEN: ${file(./config.${self:custom.currentStage}.json):GITHUB_API_TOKEN}
+    GITHUB_USERNAME: ${file(./config.${self:custom.currentStage}.json):GITHUB_USERNAME}
+    OPEN_ITEMS_TABLE: ${self:custom.openItemsTable}
+    CLOSED_ITEMS_TABLE: ${self:custom.closedItemsTable}
+    DEBUG: false
+  # Set IAM permissions for the functions
   iamRoleStatements:
   - Effect: Allow
     Action:
@@ -18,8 +37,13 @@ provider:
       - dynamodb:PutItem
       - dynamodb:UpdateItem
       - dynamodb:DeleteItem
-    Resource: "arn:aws:dynamodb:us-west-2:*:*"
+    # Allow function to access only this database
+    Resource: [
+      "arn:aws:dynamodb:${self:custom.currentRegion}:*:table/${self:custom.openItemsTable}",
+      "arn:aws:dynamodb:${self:custom.currentRegion}:*:table/${self:custom.closedItemsTable}"
+      ]
 
+# 'functions' references all the functions and events in the service
 functions:
   githubWebhookListener:
     handler: handler.githubWebhookListener
@@ -27,31 +51,29 @@ functions:
       - http:
           path: webhook
           method: post
-          integration: lambda
           cors: true
-  getAll:
-    handler: handler.getItems
+  getOpenItems:
+    handler: handler.getOpenItems
     events:
       - http:
-          path: issues
+          path: open
           method: get
-          integration: lambda
           cors: true
-  getRecentlyCompleted:
-    handler: handler.getCompletedItems
+  getClosedItems:
+    handler: handler.getClosedItems
     events:
       - http:
-          path: completed
+          path: closed
           method: get
-          integration: lambda
           cors: true
 
+# 'resources' defines any infrastructure needed for the service aka a database
 resources:
   Resources:
-    statusBoardOpenIssues:
+    OpenIssues:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: status_board_open_issues
+        TableName: ${self:custom.openItemsTable}
         AttributeDefinitions:
           - AttributeName: number
             AttributeType: N
@@ -61,10 +83,10 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-    statusBoardClosedIssues:
+    ClosedIssues:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: status_board_closed_issues
+        TableName: ${self:custom.closedItemsTable}
         AttributeDefinitions:
           - AttributeName: number
             AttributeType: N
