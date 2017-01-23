@@ -35,12 +35,7 @@ export default class StatusBoard extends Component {
     window.removeEventListener('resize', this.resizeFunction)
   }
   changeView = (e) => {
-    // mobile safari choking on forEach
-    // this.columnNodes.forEach((column) => {
-    //   let id = column.id.replace('serverless-status-column-', '')
-    //   let toggle = (e.target.dataset.column === id) ? 'block' : 'none'
-    //   column.style.display = toggle
-    // })
+    // mobile safari choking on forEach ¯\_(ツ)_/¯
     for (var i = 0; i < this.columnNodes.length; i++) {
       const column = this.columnNodes[i]
       let id = column.id.replace('serverless-status-column-', '')
