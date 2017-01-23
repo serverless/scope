@@ -10,12 +10,15 @@ coverage
 # production
 build
 
-# secrets
+# dev stage secrets
+config.dev.json
+
+# prod stage secrets
 config.prod.json
+
 
 # misc
 .DS_Store
 .env
 npm-debug.log
-pull-request.js
 dev-serverless.yml
