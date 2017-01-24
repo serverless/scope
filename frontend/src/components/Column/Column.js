@@ -56,7 +56,7 @@ function sortMileStones(a, b) {
 
 export default class Column extends Component {
   renderItems() {
-    const { items, sortOrder, sortBy, id, stickyMilestones } = this.props
+    const { items, sortOrder, sortBy, stickyMilestones } = this.props
     if (!items) {
       return null
     }
@@ -103,26 +103,26 @@ export default class Column extends Component {
           return labelItem.name
         })
         Object.keys(ribbonLabels).forEach((n, j) => {
-          console.log(n)
+          // console.log(n)
           if (normalizedLabelsFromItem.includes(n)) {
             const bgColor = ribbonLabels[n].backgroundColor
             const textColor = ribbonLabels[n].textColor
             const ribbonText = ribbonLabels[n].text
             if (textColor) {
-              console.log('-----------------------')
-              console.log('Match!', ribbonText)
-              console.log(item)
+              // console.log('-----------------------')
+              // console.log('Match!', ribbonText)
+              // console.log(item)
               hasVisibleLabel = true
               tag = (
-                <span className={styles.label + ' ' + styles.help} style={{background: bgColor}}>
+                <span key={j} className={styles.label + ' ' + styles.help} style={{background: bgColor}}>
                   <div className={styles.inner}>
-                    <div className={styles.innerText}>
+                    <div className={styles.innerText} style={{color: textColor}}>
                       {ribbonText}
                     </div>
                   </div>
                 </span>
               )
-              console.log('-----------------------')
+              // console.log('-----------------------')
             }
           }
         })
@@ -178,10 +178,10 @@ export default class Column extends Component {
 
       if (item.labels && item.labels.length) {
         // console.log(item.labels)
-        item.labels.forEach((l) => {
+        item.labels.forEach((l, n) => {
 
           testTags.push(
-            <span className={styles.tag} title={l.name} style={{background: `#${l.color}`}}>
+            <span key={n} className={styles.tag} title={l.name} style={{background: `#${l.color}`}}>
                {l.name}
             </span>
           )

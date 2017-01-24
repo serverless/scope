@@ -5,7 +5,11 @@ var scriptLoaderUtil = require('script-loader-util');
 
 var buildPath = path.join(__dirname, '../build')
 var assets = require('../build/asset-manifest.json')
-// console.log('assets', assets)
+// Build assets generated from webpack
+/*
+console.log('assets', assets)
+/**/
+
 var file = path.join(buildPath, assets['main.js'])
 console.log('redeploying file', file)
 

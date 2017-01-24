@@ -2,6 +2,17 @@
 
 Open source kan-ban like view of your open source project.
 
+## Setup
+
+1. Deploy the serverless Backend
+
+2. Grab your API endpoints and plug them into the frontend
+
+3. Deploy the frontend to amazon s3
+
+4. Include script on your site!
+
+
 ## Features
 
 - Customize Columns

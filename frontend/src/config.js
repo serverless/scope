@@ -1,23 +1,23 @@
+/** Configuration for the frontend of the status-board */
 module.exports = () => {
   return {
-    // set to true to debug sorting
-    debug: false,
+    // Set the react mount node you want to use
     mountNodeID: 'status-board',
     // Set your repo userName/repoName
     repo: 'serverless/serverless',
     // Override the styles of the board
     theme: {
-      backgroundColor: 'transparent',
+      backgroundColor: '#191919',
       /**  default #fff */
       columnHeadingColor: '#fff',
       // #9e9e9e
       columnCountColor: '#9e9e9e',
       //  #fff
       cardTextColor: '#000',
-      cardTextColor: '#fff',
+      // cardTextColor: '#fff',
       // #353535
       cardBackgroundColor: '#eee',
-      cardBackgroundColor: '#353535',
+      // cardBackgroundColor: '#353535',
     },
     // Set your API endpoints
     api: {
@@ -34,8 +34,7 @@ module.exports = () => {
     },
     // Show or hide completed column
     recentlyCompleted: {
-      show: true,
-      timeRange: 'xyz'
+      show: true
     },
     // Set column sort order. 'updated_at', 'created_at', 'comments', 'milestone'
     sortBy: 'updated_at',
@@ -43,28 +42,12 @@ module.exports = () => {
     sortOrder: 'desc',
     // Keep Milestones at top of column
     stickyMilestones: false,
-    /** These are the visible ribbons on cards. You can customize these per tag if you wish */
-    ribbons: {
-      'kind/bug': {
-          text: 'Bug',
-          textColor: '#fff',
-          backgroundColor: '#f05656'
-      },
-      'status/help-wanted': {
-          text: 'Help wanted',
-          textColor: '#fff',
-          backgroundColor: '#38912c'
-      },
-      'status/easy-pick': {
-          text: 'Easy Pick',
-          textColor: '#fff',
-          backgroundColor: '#3FA731'
-      },
-    },
     // configure columns
     columns: [
       {
+        // Add a title to a given column
         title: "discussing",
+        // Include the github tags you want to display in the column
         githubTags: [
           'kind/enhancement',
           'kind/feature',
@@ -73,18 +56,6 @@ module.exports = () => {
           'status/needs-attention'
         ],
       },
-      // {
-      //   title: "question",
-      //   githubTags: [
-      //     'kind/question',
-      //   ]
-      // },
-      // {
-      //   title: "lolz",
-      //   githubTags: [
-      //     'kind/question',
-      //   ]
-      // },
       {
         title: "waiting",
         githubTags: [
@@ -105,5 +76,25 @@ module.exports = () => {
         ]
       },
     ],
+    /** These are the visible ribbons on cards. You can customize these per tag if you wish */
+    ribbons: {
+      'kind/bug': {
+          text: 'Bug',
+          textColor: '#fff',
+          backgroundColor: '#f05656'
+      },
+      'status/help-wanted': {
+          text: 'Help wanted',
+          textColor: '#fff',
+          backgroundColor: '#38912c'
+      },
+      'status/easy-pick': {
+          text: 'Easy Pick',
+          textColor: '#fff',
+          backgroundColor: '#3FA731'
+      },
+    },
+    // set to true to debug sorting
+    debug: false,
   }
 }
