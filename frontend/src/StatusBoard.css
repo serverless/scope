@@ -2,6 +2,7 @@
 .container {
   line-height: 22.8px;
   position: relative;
+  background: $backgroundColor;
 }
 .list {
   font-size: 14px;
@@ -9,6 +10,7 @@
   align-items: flex-start;
   max-height: 100vh;
   overflow: hidden;
+  overflow-x: visible;
 }
 .settings {
   padding: 15px;
@@ -80,6 +82,7 @@
   }
   .mobile-switcher {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     position: fixed;

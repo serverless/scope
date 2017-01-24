@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import debounce from 'lodash.debounce'
 import Column from './components/Column/Column'
 import api from './utils/api'
-import initialConfig from './config'
+import getConfig from './utils/get-config'
 import GearIcon from './components/Gear/Gear'
 import styles from './StatusBoard.css'
+
+const initialConfig = getConfig()
 
 export default class StatusBoard extends Component {
   constructor (props, context) {
@@ -90,7 +92,7 @@ export default class StatusBoard extends Component {
           onClick={this.changeView}
           className={styles.item}
         >
-         {column.mobileToggleTitle}
+         {column.title}
         </span>
       )
     })
@@ -135,9 +137,8 @@ export default class StatusBoard extends Component {
   render() {
     const { showOptions } = this.state
     const showMenu = (showOptions) ? 'block' : 'none'
-    const bgColor = initialConfig.theme.backgroundColor
     return (
-      <div className={styles.container} style={{backgroundColor: bgColor}}>
+      <div className={styles.container}>
         <div className={styles.svg}>
           <span onClick={this.toggleSetting}><GearIcon  /></span>
           <div className={styles.settings} style={{display: showMenu}}>

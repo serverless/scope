@@ -1,6 +1,8 @@
 import axios from 'axios'
 import sortIssues from './sort'
-import config from '../config'
+import getConfig from './get-config'
+
+const config = getConfig()
 
 const api = {
   getCompleted: function (username) {

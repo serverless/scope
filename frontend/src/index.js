@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import StatusBoard from './StatusBoard';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import StatusBoard from './StatusBoard'
 
-ReactDOM.render(<StatusBoard />, document.getElementById('status'));
+ReactDOM.render(<StatusBoard />, document.getElementById('status-board'))

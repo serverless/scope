@@ -1,10 +1,15 @@
 import React, {Component, PropTypes} from 'react'
 import CommentIcon from '../Comment/Comment'
 import MilestoneIcon from '../Milestone/Milestone'
-import config from '../../config'
+import LabelIcon from '../Label/Label'
+import LinkIcon from '../Link/Link'
+import getConfig from '../../utils/get-config'
+import timeAgo from 'time-ago'
 import { githubIssueURL, githubUserImage } from '../../utils/github-urls'
 import styles from './Column.css'
 
+const config = getConfig()
+const ta = timeAgo()
 const propTypes = {
   children: PropTypes.any
 }
@@ -51,7 +56,7 @@ function sortMileStones(a, b) {
 
 export default class Column extends Component {
   renderItems() {
-    const { items, sortOrder, sortBy, stickyMilestones } = this.props
+    const { items, sortOrder, sortBy, id, stickyMilestones } = this.props
     if (!items) {
       return null
     }
@@ -66,6 +71,10 @@ export default class Column extends Component {
     }
 
     let columnItems = items
+    let ribbonLabels = config.ribbons
+    // console.log('id', id)
+
+
 
     if (stickyMilestones) {
       const milestoneItems = items.filter((item) => {
@@ -85,6 +94,40 @@ export default class Column extends Component {
       const githubURL = githubIssueURL(item.number, config.repo)
       let hasVisibleLabel = false
       let assigneeRender
+
+      // has special label requirements?
+      let tag
+      if (ribbonLabels && item.labels && item.labels.length) {
+        // console.log('specialTags', specialTags)
+        const normalizedLabelsFromItem = item.labels.map((labelItem) => {
+          return labelItem.name
+        })
+        Object.keys(ribbonLabels).forEach((n, j) => {
+          console.log(n)
+          if (normalizedLabelsFromItem.includes(n)) {
+            const bgColor = ribbonLabels[n].backgroundColor
+            const textColor = ribbonLabels[n].textColor
+            const ribbonText = ribbonLabels[n].text
+            if (textColor) {
+              console.log('-----------------------')
+              console.log('Match!', ribbonText)
+              console.log(item)
+              hasVisibleLabel = true
+              tag = (
+                <span className={styles.label + ' ' + styles.help} style={{background: bgColor}}>
+                  <div className={styles.inner}>
+                    <div className={styles.innerText}>
+                      {ribbonText}
+                    </div>
+                  </div>
+                </span>
+              )
+              console.log('-----------------------')
+            }
+          }
+        })
+      }
+
       if (item.assignees && item.assignees.length) {
         // console.log('assignee', item.assignees)
         const spacing = (item.assignees.length > 1) ? styles.multiplePeople : ''
@@ -130,35 +173,25 @@ export default class Column extends Component {
           </span>
         )
       }
-      let tag
+      let testTags = []
+      let filler = []
+
       if (item.labels && item.labels.length) {
         // console.log(item.labels)
         item.labels.forEach((l) => {
 
-          if(l.name === 'kind/bug') {
-            hasVisibleLabel = true
-            tag = (
-              <span className={styles.label + ' ' + styles.bug}>
-                <div className={styles.inner}>
-                  <div className={styles.innerText}>
-                    Bug
-                  </div>
-                </div>
-              </span>
-            )
-          }
-          if(l.name === 'status/help-wanted' || l.name === 'status/easy-pick') {
-            hasVisibleLabel = true
-            tag = (
-              <span className={styles.label + ' ' + styles.help}>
-                <div className={styles.inner}>
-                  <div className={styles.innerText}>
-                  Help wanted
-                  </div>
-                </div>
-              </span>
-            )
-          }
+          testTags.push(
+            <span className={styles.tag} title={l.name} style={{background: `#${l.color}`}}>
+               {l.name}
+            </span>
+          )
+          filler.push(
+            <div
+              style={{background: `#${l.color}`,
+              height: `${100 / item.labels.length}%`,
+              width: `100%` }}>
+            </div>
+          )
         })
       }
       let commentRender
@@ -184,33 +217,46 @@ export default class Column extends Component {
 
       var updatedTimestamp = new Date(item.updated_at).getTime();
       var createdTimeStamp = new Date(item.created_at).getTime();
-      let debugInfo = (
-        <span>
-          {'updated'} - {getDayStart(updatedTimestamp)} <br/>
-          {'created'} - {getDayStart(createdTimeStamp)} <br/>
-          {'comments'} - {item.comments} <br/>
-        </span>
-      )
-      debugInfo = null
+
+      let debugInfo
+      if (config.debug) {
+        debugInfo = (
+          <span>
+            {'updated'} - {getDayStart(updatedTimestamp)} <br/>
+            {'created'} - {getDayStart(createdTimeStamp)} <br/>
+            {'comments'} - {item.comments} <br/>
+          </span>
+        )
+      }
+      // debugInfo = null
       const visibleLabelClass = (hasVisibleLabel) ? styles.hasLabel : ''
+      const time = ta.ago(updatedTimestamp)
+      let showTags
+      if (testTags.length) {
+        showTags = <span className={styles.tagContainer}><LabelIcon />{testTags}</span>
+      }
       return(
         <li key={i} className={styles.card + ' ' + visibleLabelClass}>
+          <div className={styles.timeAgo}>{time}</div>
           {tag}
+
           <div className={styles.title}>
             <a
-              title={`View Issue #${item.number} on github`}
               target='_blank'
               href={githubURL}
             >
               {debugInfo}
-              {item.title}
+
+              {item.title}<span className={styles.linkIcon}><LinkIcon/></span>
             </a>
           </div>
           <div className={styles.leftMeta + ' ' + hasMilestoneClass}>
           {assigneeRender}
           {commentRender}
-          </div>
+          {showTags}
           {milestone}
+          </div>
+
         </li>
       )
     })
