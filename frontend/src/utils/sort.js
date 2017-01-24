@@ -17,20 +17,10 @@ export default function sortIssuesIntoColumns(issues) {
       })
       // loop over columns defined in config
       config.columns.forEach((column, i) => {
-        // console.log('column', column)
-        const normalizeTags = column.githubTags.map((tag) => {
-          if (typeof tag === 'string') {
-            return tag
-          }
-          if (typeof tag === 'object') {
-            return tag.name
-          }
-        })
-        // console.log('normalizeTags', normalizeTags)
         var itemAdded = false
         labels.forEach((lab, j) => {
 
-          if (normalizeTags.includes(lab) && !itemAdded) {
+          if (column.githubTags.includes(lab) && !itemAdded) {
             itemAdded = true
             // Column has this tag configured. Add issue/pr to column
             previousValue[column.title].push(currentValue)

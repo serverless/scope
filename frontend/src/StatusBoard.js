@@ -13,6 +13,7 @@ export default class StatusBoard extends Component {
     super(props, context)
     this.state = {
       config: initialConfig,
+      loading: true,
       showOptions: false
     }
     this.columnNodes = null
@@ -25,10 +26,15 @@ export default class StatusBoard extends Component {
       })
     });
     api.getOpenIssues().then((sortedItems) => {
-      this.setState(sortedItems)
+      console.log('sortedItems', sortedItems)
+      this.setState({
+        loading: false,
+        ...sortedItems
+      }, () => {
+        // get columns Nodes for mobile toggling
+        this.columnNodes = this.refs.columnList.querySelectorAll('.serverless-status-column')
+      })
     })
-    // get columns Nodes for mobile toggling
-    this.columnNodes = this.refs.columnList.querySelectorAll('.serverless-status-column')
     // Set debounced resize listener
     this.resizeFunction = debounce(this.handleDesktopResize, 100)
     window.addEventListener('resize', this.resizeFunction)
@@ -37,9 +43,10 @@ export default class StatusBoard extends Component {
     window.removeEventListener('resize', this.resizeFunction)
   }
   changeView = (e) => {
+    const columnNodes = this.refs.columnList.querySelectorAll('.serverless-status-column')
     // mobile safari choking on forEach ¯\_(ツ)_/¯
-    for (var i = 0; i < this.columnNodes.length; i++) {
-      const column = this.columnNodes[i]
+    for (var i = 0; i < columnNodes.length; i++) {
+      const column = columnNodes[i]
       let id = column.id.replace('serverless-status-column-', '')
       let toggle = (e.target.dataset.column === id) ? 'block' : 'none'
       column.style.display = toggle
@@ -54,6 +61,7 @@ export default class StatusBoard extends Component {
   }
   renderColumns() {
     const { completedItems, config } = this.state
+
     let columns = config.columns.map((column, i) => {
       return (
         <Column
@@ -135,8 +143,15 @@ export default class StatusBoard extends Component {
     })
   }
   render() {
-    const { showOptions } = this.state
+    const { showOptions, loading } = this.state
     const showMenu = (showOptions) ? 'block' : 'none'
+    if (loading) {
+      return (
+        <div className={styles.loading}>
+            <div className={styles.rotatingPlane}></div>
+        </div>
+      )
+    }
     return (
       <div className={styles.container}>
         <div className={styles.svg}>
