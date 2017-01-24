@@ -1,0 +1,16 @@
+{
+  "name": "github-webhook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "deploy:dev": "sls deploy --stage dev",
+    "deploy:prod": "sls deploy"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "lodash.isempty": "^4.4.0",
+    "sync-request": "^3.0.1"
+  }
+}
