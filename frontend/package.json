@@ -45,7 +45,7 @@
     "postcss-color-function": "^2.0.1",
     "postcss-import": "^9.0.0",
     "postcss-initial": "^1.5.3",
-    "postcss-loader": "1.0.0",
+    "postcss-loader": "^0.7.0",
     "postcss-math": "0.0.5",
     "postcss-mixins": "^5.4.0",
     "postcss-nested": "^1.0.0",
@@ -67,7 +67,8 @@
     "axios": "^0.15.3",
     "lodash.debounce": "^4.0.8",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "time-ago": "^0.1.0"
   },
   "jest": {
     "collectCoverageFrom": [

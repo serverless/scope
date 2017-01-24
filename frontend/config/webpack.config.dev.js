@@ -1,5 +1,4 @@
 const path = require('path')
-var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
@@ -7,12 +6,24 @@ var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 var getClientEnvironment = require('./env');
 var paths = require('./paths');
-var postCSSConfig = require('./postcss.config')
-
-
 var publicPath = '/';
 var publicUrl = '';
 var env = getClientEnvironment(publicUrl);
+
+/* Hot module reloading for PostCSS defined variables! */
+const postcssConfigFile = require.resolve("./postcss.config.js")
+const postcssConfig = (webpackInstance) => {
+  const varFile = require.resolve("../src/config.js")
+  const varFileContents = () => {
+    webpackInstance.addDependency(varFile)
+    delete require.cache[varFile]
+    return require(varFile)()
+  }
+  webpackInstance.addDependency(postcssConfigFile)
+  delete require.cache[postcssConfigFile]
+  return require(postcssConfigFile)(varFileContents())
+}
+/* End Hot module reloading for PostCSS defined variables! */
 
 module.exports = {
   devtool: 'cheap-module-source-map',
@@ -96,7 +107,7 @@ module.exports = {
       }
     ]
   },
-  postcss: postCSSConfig,
+  postcss: postcssConfig,
   plugins: [
     new InterpolateHtmlPlugin({
       PUBLIC_URL: publicUrl

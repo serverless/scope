@@ -8,7 +8,8 @@ var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var url = require('url');
 var paths = require('./paths');
 var getClientEnvironment = require('./env');
-var postCSSConfig = require('./postcss.config')
+const config = require("../src/config")()
+var postCSSConfig = require('./postcss.config')(config)
 var AssetsPlugin = require('assets-webpack-plugin')
 
 function ensureSlash(path, needsSlash) {
