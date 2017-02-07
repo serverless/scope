@@ -1,5 +1,6 @@
 {
   "region": "us-west-2",
+  "REPO": "username/repoName",
   "GITHUB_WEBHOOK_SECRET": "xxxxx",
   "GITHUB_API_TOKEN": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
   "GITHUB_USERNAME": "YourGithubUserName"
