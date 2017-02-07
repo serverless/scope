@@ -181,8 +181,8 @@ export default class Column extends Component {
         item.labels.forEach((l, n) => {
           const githubLabelLink = `https://github.com/serverless/serverless/labels/${l.name}`
           testTags.push(
-            <a className={styles.labelLink} href={githubLabelLink} target='_blank'>
-              <span key={n} className={styles.tag} style={{background: `#${l.color}`}}>
+            <a key={n} className={styles.labelLink} href={githubLabelLink} target='_blank'>
+              <span className={styles.tag} style={{background: `#${l.color}`}}>
                 <span className={styles.tooltip}>{l.name}</span>
               </span>
             </a>

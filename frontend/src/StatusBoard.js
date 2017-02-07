@@ -26,7 +26,7 @@ export default class StatusBoard extends Component {
       })
     });
     api.getOpenIssues().then((sortedItems) => {
-      console.log('sortedItems', sortedItems)
+      // console.log('sortedItems', sortedItems)
       this.setState({
         loading: false,
         ...sortedItems

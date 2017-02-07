@@ -39,15 +39,14 @@ var env = getClientEnvironment(publicUrl);
 if (env['process.env'].NODE_ENV !== '"production"') {
   throw new Error('Production builds must have NODE_ENV=production.');
 }
+
 var externals = []
-if (argv.excludeReact) {
+var excludeReact = (argv.excludeReact && argv.excludeReact !== 'false')
+if (excludeReact) {
   externals = [{
     'react': 'window.React',
     'react-dom': 'window.ReactDOM'
   }]
-}
-if (argv.excludeReact === 'false') {
-  externals = []
 }
 
 module.exports = {

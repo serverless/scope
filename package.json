@@ -4,6 +4,6 @@
   "description": "Open Source Serverless Status Board for custom views of open issues and PRs in your repo",
   "main": "index.js",
   "scripts": {},
-  "author": "",
+  "author": "DavidWells",
   "license": "MIT"
 }
