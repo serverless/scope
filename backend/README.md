@@ -18,11 +18,11 @@ Duplicate `config.prod.example.json` into a file named `config.prod.json` and fi
 }
 ```
 
-- `region` - the AWS region you would like to deploy to. [See full list here](http://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region)
-- `REPO` - your repo's orgName/repoName. Example [serverless/serverless](http://github.com/serverless/serverless)
-- `GITHUB_WEBHOOK_SECRET` - any random string of text you want to verify your webhook is coming from github. `blahblahblahMySecret`
-- `GITHUB_API_TOKEN` - If you run the setup function (not required), you could run into github rate limits, this will make sure you don't
-- `GITHUB_USERNAME` - Your github username. Needed for an additional request to get label data from PR activity
+- **region** - the AWS region you would like to deploy to. [See full list here](http://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region)
+- **REPO** - your repo's orgName/repoName. Example [serverless/serverless](http://github.com/serverless/serverless)
+- **GITHUB_WEBHOOK_SECRET** - any random string of text you want to verify your webhook is coming from github. `blahblahblahMySecret`
+- **GITHUB_API_TOKEN** - If you run the setup function (not required), you could run into github rate limits, this will make sure you don't
+- **GITHUB_USERNAME** - Your github username. Needed for an additional request to get label data from PR activity
 
 <!-- AUTO-GENERATED-CONTENT:END -->
 
