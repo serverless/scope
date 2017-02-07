@@ -8,6 +8,12 @@ module.exports = (event, context, callback) => {
     if (err) return callback(err)
 
     return callback(null, {
+      headers: {
+         // Required for CORS support to work
+        "Access-Control-Allow-Origin" : "*",
+        // Required for cookies, authorization headers with HTTPS
+        "Access-Control-Allow-Credentials" : true
+      },
       statusCode: 200,
       body: JSON.stringify({
         items: items,
