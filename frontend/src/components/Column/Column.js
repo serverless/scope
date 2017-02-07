@@ -181,8 +181,8 @@ export default class Column extends Component {
         item.labels.forEach((l, n) => {
 
           testTags.push(
-            <span key={n} className={styles.tag} title={l.name} style={{background: `#${l.color}`}}>
-               {l.name}
+            <span key={n}  className={styles.tag} title={l.name} style={{background: `#${l.color}`}}>
+               <span className={styles.tooltip}>{l.name}</span>
             </span>
           )
           filler.push(
@@ -233,7 +233,7 @@ export default class Column extends Component {
       const time = ta.ago(updatedTimestamp)
       let showTags
       if (testTags.length) {
-        showTags = <span className={styles.tagContainer}><LabelIcon />{testTags}</span>
+        showTags = <span className={styles.tagContainer} data-tooltip="Hello World!"><LabelIcon />{testTags}</span>
       }
       return(
         <li key={i} className={styles.card + ' ' + visibleLabelClass}>

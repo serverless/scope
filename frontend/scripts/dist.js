@@ -10,6 +10,7 @@ var assets = require('../build/asset-manifest.json')
 console.log('assets', assets)
 /**/
 
+
 var file = path.join(buildPath, assets['main.js'])
 console.log('redeploying file', file)
 
@@ -41,7 +42,8 @@ fs.readFile(file, function (err, data) {
     console.log('App re-deployed', data.Location)
     const url = decodeURIComponent(data.Location)
     // build loader
-    var loaderScript = scriptLoaderUtil(appName, url)
+    var scriptName = `${appName}-script`
+    var loaderScript = scriptLoaderUtil(scriptName, url)
     var loaderBase64data = new Buffer(loaderScript, 'binary');
     var loaderParams = {
       Bucket: bucketName,

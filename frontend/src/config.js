@@ -1,4 +1,5 @@
 /** Configuration for the frontend of the status-board */
+
 module.exports = () => {
   return {
     // Set the react mount node you want to use
@@ -22,15 +23,7 @@ module.exports = () => {
     // Set your API endpoints
     api: {
       open: 'https://kouf9xf85f.execute-api.us-west-2.amazonaws.com/dev/issues',
-      completed: 'https://kouf9xf85f.execute-api.us-west-2.amazonaws.com/dev/completed',
-      dev: {
-        open: 'https://kouf9xf85f.execute-api.us-west-2.amazonaws.com/dev/issues',
-        completed: 'https://kouf9xf85f.execute-api.us-west-2.amazonaws.com/dev/completed'
-      },
-      prod: {
-        open: 'https://kouf9xf85f.execute-api.us-west-2.amazonaws.com/dev/issues',
-        completed: 'https://kouf9xf85f.execute-api.us-west-2.amazonaws.com/dev/completed'
-      }
+      completed: 'https://kouf9xf85f.execute-api.us-west-2.amazonaws.com/dev/completed'
     },
     // Show or hide completed column
     recentlyCompleted: {
