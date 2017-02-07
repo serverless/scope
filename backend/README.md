@@ -28,7 +28,7 @@ Duplicate `config.prod.example.json` into a file named `config.prod.json` and fi
 
 ## Setup
 
-After you have plugged in your values to `config.prod.json`
+After you [added your values](#Configuration) to the newly created `config.prod.json` file, you are ready to deploy!
 
 1. Run `serverless deploy` and wait for the stack to be created
 
