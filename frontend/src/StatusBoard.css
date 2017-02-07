@@ -74,6 +74,7 @@
   height: 60px;
   background-color: $columnHeadingColor;
   margin: 0 auto;
+  margin-bottom: 100px;
   animation: rotatePlane 1.2s infinite ease-in-out;
 }
 

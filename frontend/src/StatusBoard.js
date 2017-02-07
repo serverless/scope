@@ -130,8 +130,7 @@ export default class StatusBoard extends Component {
       setting = 'stickyMilestones'
       value = true
     }
-    // console.log('setting', setting)
-    // console.log('settingValue', value)
+
     updatedOptions[setting] = value
     this.setState({
       config: { ...this.state.config, ...updatedOptions }

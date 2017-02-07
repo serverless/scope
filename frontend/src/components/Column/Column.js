@@ -179,11 +179,13 @@ export default class Column extends Component {
       if (item.labels && item.labels.length) {
         // console.log(item.labels)
         item.labels.forEach((l, n) => {
-
+          const githubLabelLink = `https://github.com/serverless/serverless/labels/${l.name}`
           testTags.push(
-            <span key={n}  className={styles.tag} title={l.name} style={{background: `#${l.color}`}}>
-               <span className={styles.tooltip}>{l.name}</span>
-            </span>
+            <a className={styles.labelLink} href={githubLabelLink} target='_blank'>
+              <span key={n} className={styles.tag} style={{background: `#${l.color}`}}>
+                <span className={styles.tooltip}>{l.name}</span>
+              </span>
+            </a>
           )
           filler.push(
             <div

@@ -96,18 +96,6 @@ module.exports = () => {
           'status/needs-attention'
         ],
       },
-      // {
-      //   title: "question",
-      //   githubTags: [
-      //     'kind/question',
-      //   ]
-      // },
-      // {
-      //   title: "lolz",
-      //   githubTags: [
-      //     'kind/question',
-      //   ]
-      // },
       {
         title: "waiting",
         githubTags: [
@@ -132,3 +120,5 @@ module.exports = () => {
 }
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
+
+## Deploy

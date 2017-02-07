@@ -11,6 +11,9 @@ var getClientEnvironment = require('./env');
 const config = require("../src/config")()
 var postCSSConfig = require('./postcss.config')(config)
 var AssetsPlugin = require('assets-webpack-plugin')
+var argv = require('yargs').argv;
+
+console.log('argv', argv)
 
 function ensureSlash(path, needsSlash) {
   var hasSlash = path.endsWith('/');
@@ -36,8 +39,16 @@ var env = getClientEnvironment(publicUrl);
 if (env['process.env'].NODE_ENV !== '"production"') {
   throw new Error('Production builds must have NODE_ENV=production.');
 }
-
-
+var externals = []
+if (argv.excludeReact) {
+  externals = [{
+    'react': 'window.React',
+    'react-dom': 'window.ReactDOM'
+  }]
+}
+if (argv.excludeReact === 'false') {
+  externals = []
+}
 
 module.exports = {
   bail: true,
@@ -52,10 +63,7 @@ module.exports = {
     chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     publicPath: publicPath
   },
-  externals: [ {
-    'react': 'window.React',
-    'react-dom': 'window.ReactDOM'
-  }],
+  externals: externals,
   resolve: {
     fallback: paths.nodePaths,
     extensions: ['.js', '.json', '.jsx', ''],
