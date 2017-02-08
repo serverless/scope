@@ -32,6 +32,20 @@ Duplicate `config.prod.example.json` into a file named `config.prod.json` and fi
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 
+You will also need to update `ADD_YOUR_REPO_NAME_HERE` in the `serverless.yml` file.
+
+```yml
+custom:
+  repoName: ADD_YOUR_REPO_NAME_HERE
+```
+
+Example:
+
+```yml
+custom:
+  repoName: serverless
+```
+
 ## Setup
 
 After you [added your values](#Configuration) to the newly created `config.prod.json` file, you are ready to deploy!
