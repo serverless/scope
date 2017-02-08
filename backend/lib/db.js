@@ -5,6 +5,7 @@ const isEmpty = require('lodash.isempty')
 const awsSDK = require('aws-sdk')
 const dynamoDoc = new awsSDK.DynamoDB.DocumentClient()
 const notFoundMsg = '404:Resource not found.'
+const DEBUG = false
 
 function put(params, callback, respondSuffix) {
   const startTime = Date.now()
@@ -13,12 +14,14 @@ function put(params, callback, respondSuffix) {
       console.log('DB PUT Error', err)
       return callback(err)
     }
-    console.log('DB PUT response', data)
     if (respondSuffix && isEmpty(data)) {
       data = respondSuffix
     }
     const endTime = Date.now()
-    console.log('DB PUT Elapsed time: ' + String(endTime - startTime) + ' milliseconds')
+    if (DEBUG) {
+      console.log('DB PUT response', data)
+      console.log('DB PUT Elapsed time: ' + String(endTime - startTime) + ' milliseconds')
+    }
     return callback(err, data)
   })
 }
@@ -30,19 +33,22 @@ function get(params, callback) {
       console.log('DB GET Error', err)
       return {} // err
     }
-    console.log('DB GET response', data)
+
     if (isEmpty(data)) {
       return callback(notFoundMsg)
     }
     const endTime = Date.now()
-    console.log('DB GET Elapsed time: ' + String(endTime - startTime) + ' milliseconds')
+    if (DEBUG) {
+      console.log('DB GET response', data)
+      console.log('DB GET Elapsed time: ' + String(endTime - startTime) + ' milliseconds')
+    }
     return callback(err, data.Item)
   })
 }
 
 function query(params, callback) {
   const startTime = Date.now()
-  console.log('query params:', params)
+  if (DEBUG) console.log('query params:', params)
   return dynamoDoc.query(params, function(err, data) {
     if (err) {
       console.log('DB Query Error', err)
@@ -66,9 +72,11 @@ function scan(params, callback) {
     if (isEmpty(data)) {
       return callback(notFoundMsg)
     }
-    console.log('DB Scan response', data)
-    const endTime = Date.now()
-    console.log('DB Scan Elapsed time: ' + String(endTime - startTime) + ' milliseconds')
+    if (DEBUG) {
+      console.log('DB Scan response', data)
+      const endTime = Date.now()
+      console.log('DB Scan Elapsed time: ' + String(endTime - startTime) + ' milliseconds')
+    }
     return callback(err, data.Items)
   })
 }
@@ -82,18 +90,21 @@ function update(params, callback) {
     if (isEmpty(data)) {
       return callback(notFoundMsg)
     }
-    console.log('DB update response', data)
-    const endTime = Date.now()
-    console.log('DB UPDATE Elapsed time: ' + String(endTime - startTime) + ' milliseconds')
+    if (DEBUG) {
+      console.log('DB update response', data)
+      const endTime = Date.now()
+      console.log('DB UPDATE Elapsed time: ' + String(endTime - startTime) + ' milliseconds')
+    }
     return callback(err, data.Attributes)
   })
 }
 
 function del(params, callback) {
   const startTime = Date.now()
-  console.log('delete params:', params)
+  if (DEBUG) {
+    console.log('delete params:', params)
+  }
   return dynamoDoc.delete(params, function(err, data) {
-    console.log(err, data)
     if (err) {
       console.log('DB delete Error', err)
       return callback(err)
@@ -101,9 +112,11 @@ function del(params, callback) {
     if (isEmpty(data)) {
       return callback(null, data)
     }
-    console.log('DB delete response', data)
     const endTime = Date.now()
-    console.log('DB DEL Elapsed time: ' + String(endTime - startTime) + ' milliseconds')
+    if (DEBUG) {
+      console.log('DB delete response', data)
+      console.log('DB DEL Elapsed time: ' + String(endTime - startTime) + ' milliseconds')
+    }
     return callback(err, data.Attributes)
   })
 }
@@ -111,8 +124,10 @@ function del(params, callback) {
 function batchGet(params, callback, table) {
   const startTime = Date.now()
   return dynamoDoc.batchGet(params, function(err, data) {
-    const endTime = Date.now()
-    console.log('DB batchGet Elapsed time: ' + String(endTime - startTime) + ' milliseconds')
+    if (DEBUG) {
+      const endTime = Date.now()
+      console.log('DB batchWrite Elapsed time: ' + String(endTime - startTime) + ' milliseconds')
+    }
     return callback(err, data.Responses[table])
   })
 }
@@ -120,8 +135,10 @@ function batchGet(params, callback, table) {
 function batchWrite(params, callback, responseValue) {
   const startTime = Date.now()
   return dynamoDoc.batchWrite(params, function(err, data) {
-    const endTime = Date.now()
-    console.log('DB batchWrite Elapsed time: ' + String(endTime - startTime) + ' milliseconds')
+    if (DEBUG) {
+      const endTime = Date.now()
+      console.log('DB batchWrite Elapsed time: ' + String(endTime - startTime) + ' milliseconds')
+    }
     return callback(err, responseValue)
   })
 }

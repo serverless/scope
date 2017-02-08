@@ -70,8 +70,10 @@ functions:
           cors: true
   setup:
     handler: handler.setup
+    timeout: 40
   teardown:
     handler: handler.tearDown
+    timeout: 20
 
 # 'resources' defines any infrastructure needed for the service aka a database
 resources:

@@ -4,15 +4,15 @@
 const db = require('./db')
 const CLOSED_ITEMS_TABLE = process.env.CLOSED_ITEMS_TABLE
 const OPEN_ITEMS_TABLE = process.env.OPEN_ITEMS_TABLE
+const DEBUG = process.env.DEBUG
 
-module.exports = function saveIssue(issue, callback) {
-  var cb = callback || noOp
+module.exports = function saveSingleIssue(issue, callback) {
   if (issue.state === 'closed' || issue.closed_at) {
     // add to closed database and remove from open issues
-    saveClosedIssue(issue, cb)
+    saveClosedIssue(issue, callback)
   } else {
     // add to open database and remove from closed issues
-    saveOpenIssue(issue, cb)
+    saveOpenIssue(issue, callback)
   }
 }
 
@@ -25,13 +25,17 @@ function saveClosedIssue(issue, callback) {
     },
   }, (err, resp) => {
     if (err) return callback(err)
-    console.log(`issue ${issue.number} deleted from ${OPEN_ITEMS_TABLE} Table`, resp)
+    if (DEBUG) {
+      console.log(`issue ${issue.number} deleted from ${OPEN_ITEMS_TABLE} Table`, resp)
+    }
     db.put({
       TableName: CLOSED_ITEMS_TABLE,
       Item: issue
     }, function(error, response) {
       if (error) return callback(error)
-      console.log(`issue ${issue.number} added to ${CLOSED_ITEMS_TABLE} Table`, response)
+      if (DEBUG) {
+        console.log(`issue ${issue.number} added to ${CLOSED_ITEMS_TABLE} Table`, response)
+      }
       return callback(null, {
         statusCode: 200,
         body: JSON.stringify({
@@ -49,7 +53,9 @@ function saveOpenIssue(issue, callback) {
     Item: issue
   }, (err, resp) => {
     if (err) return callback(err)
-    console.log(`issue ${issue.number} added to ${OPEN_ITEMS_TABLE} Table`, resp)
+    if (DEBUG) {
+      console.log(`issue ${issue.number} added to ${OPEN_ITEMS_TABLE} Table`, resp)
+    }
     // Delete from closed table if it's being reopened
     db.delete({
       TableName: CLOSED_ITEMS_TABLE,
@@ -58,7 +64,10 @@ function saveOpenIssue(issue, callback) {
       }
     }, function(err, response) {
       if (err) return callback(err)
-      console.log(`issue ${issue.number} deleted from ${CLOSED_ITEMS_TABLE} Table`, response)
+      if (DEBUG) {
+        console.log(`issue ${issue.number} deleted from ${CLOSED_ITEMS_TABLE} Table`, response)
+      }
+
       return callback(null, {
         statusCode: 200,
         body: JSON.stringify({
@@ -68,6 +77,3 @@ function saveOpenIssue(issue, callback) {
     })
   })
 }
-
-
-function noOp(){}
