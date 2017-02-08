@@ -4,9 +4,11 @@
 
 # Scope - Serverless Open Source Status Board</h1>
 
-Scope is a customizable birdeye's view of your open source project.
+Scope is a customizable birdeye's view of your Github project.
 
-Built using event driven serverless tech, the application can be cloned down & deployed for your open source project in minutes.
+It automatically pulls in issues & Pull requests and sorts them into columns you define. Think github projects on steroids.
+
+Built using event driven serverless tech, the application can be cloned down, configured, & deployed for your project in minutes.
 
 Deploy it as a stand-alone application or embed it directly into your project's site.
 
@@ -28,12 +30,13 @@ Run it for **[free](https://aws.amazon.com/free/)** under AWS's generous free ti
 
 <img align="right" width="391" height="218" src="https://cloud.githubusercontent.com/assets/532272/22727459/cad63336-ed8d-11e6-8924-fce36f239a84.gif">
 
-- Look mom! No servers!
-- Avoid github rate limiting via event driven webhooks
+- Customize the labels/columns to fit your project
 - Customizable styles 💁
-- Map your projects tags into the columns you want
+- Driven by push based Github webhooks
+- Run as standalone app or Embed on your project's site
+- Look mom! No servers!
 
-Map your projects github labels to columns of your choosing and have them automatically update.
+Data automatically updates when activity happens in your repository and your status board will reflect the latest state of your project.
 
 ## Why we built it
 
