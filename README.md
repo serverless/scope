@@ -2,9 +2,7 @@
   <img width="800" height="352" src="https://cloud.githubusercontent.com/assets/532272/22727205/6f4d658a-ed8c-11e6-8921-8baf70f011e0.jpg">
 </p>
 
-<p align="center">
-<h1>Scope - Serverless Open Source Status Board</h1>
-</p>
+# Scope - Serverless Open Source Status Board</h1>
 
 Scope is a customizable birdeye's view of your open source project.
 
@@ -14,11 +12,19 @@ Deploy it as a stand-alone application or embed it directly into your project's 
 
 Run it for **[free](https://aws.amazon.com/free/)** under AWS's generous free tier.
 
-<!-- AUTO-GENERATED-CONTENT:START (TOC) -->
+![statusgif](https://cloud.githubusercontent.com/assets/532272/22727459/cad63336-ed8d-11e6-8924-fce36f239a84.gif)
 
+<!-- AUTO-GENERATED-CONTENT:START (TOC) -->
+- [Features:](#features)
+- [Why?](#why)
+- [Contributing](#contributing)
+- [Setup](#setup)
+- [FAQ](#faq)
 <!-- AUTO-GENERATED-CONTENT:END -->
 
-### Features:
+## Features
+
+<img align="right" width="100" height="100" src="https://cloud.githubusercontent.com/assets/532272/22727459/cad63336-ed8d-11e6-8924-fce36f239a84.gif">
 
 - Look mom! No servers!
 - Avoid github rate limiting via event driven webhooks
@@ -35,9 +41,7 @@ We built this tool for our community to help keep people up to speed with what i
 - Call out which issues need attention from your community
 - Zoom into important aspect of your open source project
 
-Diagram here
-
-GIF demo with link to YouTube video
+<img align="right" width="100" height="100" src="https://cloud.githubusercontent.com/assets/532272/22727459/cad63336-ed8d-11e6-8924-fce36f239a84.gif">
 
 [Front-end Documentation & setup](./backend/README.md)
 
