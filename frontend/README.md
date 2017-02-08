@@ -2,6 +2,8 @@
 
 The status board front-end is fully configurable to suite your projects needs.
 
+Watch the [Backend Video Tutorials](https://www.youtube.com/watch?v=YtYjx3Z5LLo&list=PLIIjEI2fYC-BtxWcDeTziRp7cIZVEepB3&index=2) first, then follow on with the [Front-end Video Tutorials](https://www.youtube.com/watch?v=DXazDrLc2u4&list=PLIIjEI2fYC-BtxWcDeTziRp7cIZVEepB3&index=5)
+
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
 - [Tech used](#tech-used)
 - [Install](#install)
