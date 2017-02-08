@@ -47,6 +47,8 @@ We built this tool for our community to help keep people up to speed with what i
 
 [Backend Documentation & setup](./backend/README.md)
 
+[Video Tutorials](https://www.youtube.com/playlist?list=PLIIjEI2fYC-BtxWcDeTziRp7cIZVEepB3)
+
 # Contributing
 
 Want to contribute back to the project? Drop an issue or open up a PR.

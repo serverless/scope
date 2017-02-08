@@ -1,6 +1,10 @@
-# Backend
+# Scope Serverless Backend
 
 The backend of the status-board is driven by 3 lambda functions exposed through API Gateway with the [http event](https://serverless.com/framework/docs/providers/aws/events/apigateway/)
+
+![cloudcraft - status board webhook listener 1](https://cloud.githubusercontent.com/assets/532272/22727938/518a5c84-ed90-11e6-8467-71099a326313.png)
+
+![cloudcraft - status board ui 2](https://cloud.githubusercontent.com/assets/532272/22727939/518cbe3e-ed90-11e6-8b77-6fba990a69c8.png)
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
 - [Configuration](#configuration)
@@ -31,6 +35,8 @@ After you [added your values](#Configuration) to the newly created `config.prod.
 
 1. Run `serverless deploy` and wait for the stack to be created
 
+  [Watch the Backend configuration video](https://www.youtube.com/watch?v=dbfTNYgWIuI&index=2&list=PLIIjEI2fYC-BtxWcDeTziRp7cIZVEepB3)
+
 2. Copy the API urls to use in the frontend portion of the application
 
 3. Populate the initial data for your status board with
@@ -41,10 +47,11 @@ After you [added your values](#Configuration) to the newly created `config.prod.
 
 4. Setup your github webhook in your repositories settings
 
-  image
-  image
+  [Watch the webhook setup  video](https://www.youtube.com/watch?v=b_DVXgiByec&list=PLIIjEI2fYC-BtxWcDeTziRp7cIZVEepB3&index=3)
 
-5. Plug in your API endpoints to the frontend application
+  ![webhook-instructions-post](https://cloud.githubusercontent.com/assets/532272/22728139/3275dbba-ed91-11e6-8331-7e5778694ecf.jpg)
+
+5. Plug in your API endpoints to the front-end application
 
   To get those API endpoints again type:
   ```bash
@@ -52,9 +59,5 @@ After you [added your values](#Configuration) to the newly created `config.prod.
   ```
 
   Head over into `../frontend/src/custom.config.js` and plugin the API endpoints
-  
 
-
-## TODO:
-
-- [] optimize getCompletedIssues query http://www.it1me.com/it-answers?id=35963243&ttl=How+to+query+DynamoDB+by+date+(range+key)%2C+with+no+obvious+hash+key%3F
+  [Watch the front-end setup  video](https://www.youtube.com/watch?v=DXazDrLc2u4&list=PLIIjEI2fYC-BtxWcDeTziRp7cIZVEepB3&index=4)
