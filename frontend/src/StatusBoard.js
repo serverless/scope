@@ -24,7 +24,7 @@ export default class StatusBoard extends Component {
       this.setState({
         completedItems: items,
       })
-    });
+    })
     api.getOpenIssues().then((sortedItems) => {
       // console.log('sortedItems', sortedItems)
       this.setState({
@@ -61,6 +61,7 @@ export default class StatusBoard extends Component {
   }
   renderColumns() {
     const { completedItems, config } = this.state
+    const hasCompletedItems = (completedItems) ? completedItems.length : false
 
     let columns = config.columns.map((column, i) => {
       return (
@@ -75,7 +76,8 @@ export default class StatusBoard extends Component {
         />
       )
     })
-    if (config.recentlyCompleted && config.recentlyCompleted.show) {
+    // show recently completed column only if turned on and has items
+    if (config.recentlyCompleted && config.recentlyCompleted.show && hasCompletedItems) {
       columns.push(
         <Column
           stickyMilestones={config.stickyMilestones}

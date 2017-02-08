@@ -1,4 +1,4 @@
-## Open Source Status Board
+# Scope - the serverless open source status board
 
 The serverless open source status board is a customizable bird eye view of your github repository.
 
@@ -6,17 +6,21 @@ Built using event driven serverless tech, the application can be cloned down and
 
 ### Features:
 
-- no servers!
-- no github rate limiting
-- Customizable columns
-- Customizable color scheme
-- Customizable visible labels on cards
+- Look mom! No servers!
+- Avoid github rate limiting via event driven webhooks
+- Customizable styles 💁
+- Map your projects tags into the columns you want
+-
 
 Map your projects github labels to columns of your choosing and have them automatically update.
 
 ## Why?
 
 We built this tool for our community to help keep people up to speed with what is happening at a higher level and highlight where we actively want feedback.
+
+- Quickly sort and see high priority issues & Pull requests
+- Call out which issues need attention from your community
+- Zoom into important aspect of your open source project
 
 Diagram here
 
@@ -74,3 +78,17 @@ sls deploy
 ## Future wishlist
 
 * The voting feature in the mock-up should not be implemented at this time.
+
+## FAQ
+
+**Do I need an AWS account for this to work?**
+
+Yes, but this will fall into the free tier of an AWS account. [Free tier Signup](https://aws.amazon.com/free/)
+
+**Does it need to show all my issues?**
+
+Nope. You choose what labels show up in each column
+
+**Do I have to show recently completed items?**
+
+Nope. You can toggle off that column in the frontend config.
