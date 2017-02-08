@@ -1,4 +1,6 @@
-![Scope](https://cloud.githubusercontent.com/assets/532272/22727052/982a109e-ed8b-11e6-90a7-abb930729410.png)
+<p align="center">
+  <img width="500" height="220" src="https://cloud.githubusercontent.com/assets/532272/22727205/6f4d658a-ed8c-11e6-8921-8baf70f011e0.jpg">
+</p>
 
 # Scope - Serverless Open Source Status Board
 
