@@ -45,7 +45,7 @@
     "http-proxy-middleware": "0.17.2",
     "jest": "17.0.2",
     "json-loader": "0.5.4",
-    "markdown-magic": "^0.1.12",
+    "markdown-magic": "^0.1.13",
     "object-assign": "4.1.0",
     "path-exists": "2.1.0",
     "postcss-color-function": "^2.0.1",

@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "description": "Open Source Serverless Status Board for custom views of open issues and PRs in your repo",
   "author": "DavidWells",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "markdown-magic": "^0.1.13"
+  }
 }
