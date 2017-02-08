@@ -17,34 +17,34 @@ The backend of the status-board is driven by 3 lambda functions exposed through 
 
 ## Configuration
 
-Duplicate `config.prod.example.json` into a file named `config.prod.json` and fill in your repositories values.
+1. Duplicate `config.prod.example.json` into a file named `config.prod.json` and fill in your repositories values.
 
-<!-- AUTO-GENERATED-CONTENT:START (CODE:src=./config.prod.example.json) -->
-<!-- The below code snippet is automatically added from ./config.prod.example.json -->
-```json
-{
-  "region": "us-west-2",
-  "REPO": "username/repoName",
-  "GITHUB_WEBHOOK_SECRET": "xxxxx",
-  "GITHUB_API_TOKEN": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-  "GITHUB_USERNAME": "YourGithubUserName"
-}
-```
-<!-- AUTO-GENERATED-CONTENT:END -->
+  <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./config.prod.example.json) -->
+  <!-- The below code snippet is automatically added from ./config.prod.example.json -->
+  ```json
+  {
+    "region": "us-west-2",
+    "REPO": "username/repoName",
+    "GITHUB_WEBHOOK_SECRET": "xxxxx",
+    "GITHUB_API_TOKEN": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "GITHUB_USERNAME": "YourGithubUserName"
+  }
+  ```
+  <!-- AUTO-GENERATED-CONTENT:END -->
 
-You will also need to update `ADD_YOUR_REPO_NAME_HERE` in the `serverless.yml` file.
+2. You will also need to update `ADD_YOUR_REPO_NAME_HERE` in the `serverless.yml` file.
 
-```yml
-custom:
-  repoName: ADD_YOUR_REPO_NAME_HERE
-```
+  ```yml
+  custom:
+    repoName: ADD_YOUR_REPO_NAME_HERE
+  ```
 
-Example:
+  Example:
 
-```yml
-custom:
-  repoName: serverless
-```
+  ```yml
+  custom:
+    repoName: serverless
+  ```
 
 ## Setup
 
