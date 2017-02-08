@@ -1,8 +1,10 @@
 <p align="center">
-  <img width="500" height="220" src="https://cloud.githubusercontent.com/assets/532272/22727205/6f4d658a-ed8c-11e6-8921-8baf70f011e0.jpg">
+  <img width="800" height="352" src="https://cloud.githubusercontent.com/assets/532272/22727205/6f4d658a-ed8c-11e6-8921-8baf70f011e0.jpg">
 </p>
 
-# Scope - Serverless Open Source Status Board
+<p align="center">
+## Scope - Serverless Open Source Status Board
+</p>
 
 Scope is a customizable birdeye's view of your open source project.
 
