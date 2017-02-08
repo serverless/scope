@@ -83,3 +83,7 @@ Nope. You can toggle off that column in the front-end config.
 **I just setup the front-end, where are the recently completed items?**
 
 They will start flowing in once you start closing issues/PRs in your repo
+
+---
+
+[Website](http://www.serverless.com) • [Email Updates](http://eepurl.com/b8dv4P) • [Gitter](https://gitter.im/serverless/serverless) • [Forum](http://forum.serverless.com) • [Meetups](https://github.com/serverless-meetups/main) • [Twitter](https://twitter.com/goserverless) • [Facebook](https://www.facebook.com/serverless) • [Contact Us](mailto:hello@serverless.com)
