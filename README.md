@@ -16,7 +16,7 @@ Run it for **[free](https://aws.amazon.com/free/)** under AWS's generous free ti
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
 - [Features:](#features)
-- [Why?](#why)
+- [Why we built it](#why)
 - [Contributing](#contributing)
 - [Setup](#setup)
 - [FAQ](#faq)
@@ -24,7 +24,7 @@ Run it for **[free](https://aws.amazon.com/free/)** under AWS's generous free ti
 
 ## Features
 
-<img align="right" width="100" height="100" src="https://cloud.githubusercontent.com/assets/532272/22727459/cad63336-ed8d-11e6-8924-fce36f239a84.gif">
+<img align="right" width="391" height="218" src="https://cloud.githubusercontent.com/assets/532272/22727459/cad63336-ed8d-11e6-8924-fce36f239a84.gif">
 
 - Look mom! No servers!
 - Avoid github rate limiting via event driven webhooks
@@ -33,15 +33,13 @@ Run it for **[free](https://aws.amazon.com/free/)** under AWS's generous free ti
 
 Map your projects github labels to columns of your choosing and have them automatically update.
 
-## Why?
+## Why we built it
 
 We built this tool for our community to help keep people up to speed with what is happening with the serverless project & to highlight places where we actively want feedback + collaboration.
 
 - Quickly sort and see high priority issues & Pull requests
 - Call out which issues need attention from your community
 - Zoom into important aspect of your open source project
-
-<img align="right" width="100" height="100" src="https://cloud.githubusercontent.com/assets/532272/22727459/cad63336-ed8d-11e6-8924-fce36f239a84.gif">
 
 [Front-end Documentation & setup](./backend/README.md)
 
