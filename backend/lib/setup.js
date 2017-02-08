@@ -14,7 +14,7 @@ module.exports = (event, context, callback) => {
   var issues = []
   // register recursive github api function
   function recursiveAPICall(url, cb) {
-    console.log('start recursive call', url)
+    console.log('start recursive github API call', url)
     var githubRequestHeaders = {
       'headers': {
         'User-Agent': GITHUB_USERNAME,
@@ -34,7 +34,7 @@ module.exports = (event, context, callback) => {
       // More pages found, make API call for additional data
       recursiveAPICall(pagination.next.url, cb)
     } else {
-      console.log('no more issues found, finish request')
+      console.log('No more issues found, finish github API request')
       // No more data found, return with all issues
       cb(issues)
     }
@@ -81,7 +81,7 @@ function handleBatchInsert(tableName, items, callback) {
     params.RequestItems[tableName] = batch
     db.batchWrite(params, function(e, data) {
       if (e) return callback(e)
-      console.log(`batch ${i} complete. ${batch.length} items added to DB`)
+      console.log(`batch #${i} complete. ${batch.length} items added to DB`)
       count++
       if (count === batches.length) {
         // last batch, callback and finish

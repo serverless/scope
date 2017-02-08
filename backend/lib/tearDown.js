@@ -69,10 +69,8 @@ function handleBatchDeletes(tableName, items, callback) {
     params.RequestItems[tableName] = batch
     db.batchWrite(params, function(error, data) {
       if (error) return callback(error)
+      console.log(`batch #${i} complete. ${batch.length} items removed from DB`)
       count++
-      console.log(`batch ${i} complete. ${batch.length} items removed from DB`)
-      console.log('batches.length', batches.length)
-      console.log('count === batches.length', count)
       if (count === batches.length) {
         // last batch, callback and finish
         callback()
