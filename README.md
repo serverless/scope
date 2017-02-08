@@ -1,3 +1,5 @@
+![Scope](https://cloud.githubusercontent.com/assets/532272/22727052/982a109e-ed8b-11e6-90a7-abb930729410.png)
+
 # Scope - Serverless Open Source Status Board
 
 Scope is a customizable birdeye's view of your open source project.
@@ -42,6 +44,8 @@ GIF demo with link to YouTube video
 Want to contribute back to the project? Drop an issue or open up a PR.
 
 ## Setup
+
+**First things first** 👉 [Setup your AWS account](https://youtu.be/HSd9uYj2LJA) and `npm i serverless -g` to be able to deploy your status board
 
 1. Deploy the serverless Backend. [Follow these instructions](./backend/README.md)
 
