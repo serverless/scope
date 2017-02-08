@@ -93,7 +93,8 @@ export default class StatusBoard extends Component {
     return columns
   }
   renderMobileToggles () {
-    const { config } = this.state
+    const { config, completedItems } = this.state
+    const hasCompletedItems = (completedItems) ? completedItems.length : false
     let mobileToggles = config.columns.map((column, i) => {
       return (
         <span
@@ -106,7 +107,7 @@ export default class StatusBoard extends Component {
         </span>
       )
     })
-    if (config.recentlyCompleted && config.recentlyCompleted.show) {
+    if (config.recentlyCompleted && config.recentlyCompleted.show && hasCompletedItems) {
       mobileToggles.push(
         <span
           key={config.columns.length}
