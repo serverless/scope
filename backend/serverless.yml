@@ -3,7 +3,7 @@ service: ${self:custom.repoName}-status-board
 
 # 'custom' is a place to define custom variables used elsewhere in the yaml config
 custom:
-  repoName: what
+  repoName: ADD_YOUR_REPO_NAME_HERE
   defaultStage: prod
   currentStage: ${opt:stage, self:custom.defaultStage}
   currentRegion: ${file(./config.${self:custom.currentStage}.json):region}

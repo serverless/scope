@@ -1,7 +1,3 @@
-/**
- *  Configuration for the frontend of the status-board
- */
-const merge = require('deepmerge')
 /* Add your custom configuration/overides to custom.config.js */
 const customConfig = require('./custom.config')()
 
@@ -124,5 +120,5 @@ module.exports = () => {
     delete defaults.ribbons
   }
 
-  return merge(defaults, customConfig)
+  return require('deepmerge')(defaults, customConfig)
 }

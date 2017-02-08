@@ -4,6 +4,9 @@
   "description": "Open Source Serverless Status Board for custom views of open issues and PRs in your repo",
   "author": "DavidWells",
   "license": "MIT",
+  "scripts": {
+    "docs": "md-magic --path 'README.md' --ignore 'node_modules'"
+  },
   "devDependencies": {
     "markdown-magic": "^0.1.13"
   }

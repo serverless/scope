@@ -2,15 +2,18 @@
 
 The backend of the status-board is driven by 3 lambda functions exposed through API Gateway with the [http event](https://serverless.com/framework/docs/providers/aws/events/apigateway/)
 
-![cloudcraft - status board webhook listener 1](https://cloud.githubusercontent.com/assets/532272/22727938/518a5c84-ed90-11e6-8467-71099a326313.png)
-
-![cloudcraft - status board ui 2](https://cloud.githubusercontent.com/assets/532272/22727939/518cbe3e-ed90-11e6-8b77-6fba990a69c8.png)
-
-<!-- AUTO-GENERATED-CONTENT:START (TOC) -->
+## Table of Contents
+<!-- ⛔️ AUTO-GENERATED-CONTENT:START (TOC:collapse=true&collapseText=Click to expand) -->
+<details>
+<summary>Click to expand</summary>
 - [Configuration](#configuration)
 - [Setup](#setup)
-- [TODO:](#todo)
+</details>
 <!-- AUTO-GENERATED-CONTENT:END -->
+
+![cloudcraft - status board webhook listener 1](https://cloud.githubusercontent.com/assets/532272/22728277/ead7cb00-ed91-11e6-98b4-98fdb36c58c2.png)
+
+![cloudcraft - status board ui 2](https://cloud.githubusercontent.com/assets/532272/22728295/01f11e72-ed92-11e6-9db8-473874b3a713.png)
 
 ## Configuration
 
@@ -61,3 +64,9 @@ After you [added your values](#Configuration) to the newly created `config.prod.
   Head over into `../frontend/src/custom.config.js` and plugin the API endpoints
 
   [Watch the front-end setup  video](https://www.youtube.com/watch?v=DXazDrLc2u4&list=PLIIjEI2fYC-BtxWcDeTziRp7cIZVEepB3&index=4)
+
+6. (optional) You can seed your initial issues/prs by running
+
+  ```
+  sls invoke -f setup
+  ```

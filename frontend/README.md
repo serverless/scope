@@ -1,6 +1,6 @@
-# Scope Frontend
+# Scope Front-end
 
-The status board was created with `create-react-app` CLI.
+The status board front-end is fully configurable to suite your projects needs.
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
 - [Tech used](#tech-used)
@@ -16,8 +16,9 @@ The status board was created with `create-react-app` CLI.
 ## Tech used
 
 - React
-- PostCSS for styles
+- PostCSS
 - Axios for AJAX requests
+- Serverless for the backend API
 
 ## Install
 
@@ -36,10 +37,6 @@ Alter the `src/custom.config.js` file to define override any of the default sett
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./src/default.config.js) -->
 <!-- The below code snippet is automatically added from ./src/default.config.js -->
 ```js
-/**
- *  Configuration for the frontend of the status-board
- */
-const merge = require('deepmerge')
 /* Add your custom configuration/overides to custom.config.js */
 const customConfig = require('./custom.config')()
 
@@ -162,7 +159,7 @@ module.exports = () => {
     delete defaults.ribbons
   }
 
-  return merge(defaults, customConfig)
+  return require('deepmerge')(defaults, customConfig)
 }
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
