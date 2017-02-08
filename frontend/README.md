@@ -2,13 +2,14 @@
 
 The status board front-end is fully configurable to suite your projects needs.
 
+Built with React, PostCSS, Axios for AJAX requests & Serverless for the [backend API](https://github.com/serverless/scope/tree/master/backend)
+
 Watch the [Backend Video Tutorials](https://www.youtube.com/watch?v=YtYjx3Z5LLo&list=PLIIjEI2fYC-BtxWcDeTziRp7cIZVEepB3&index=2) first, then follow on with the [Front-end Video Tutorials](https://www.youtube.com/watch?v=DXazDrLc2u4&list=PLIIjEI2fYC-BtxWcDeTziRp7cIZVEepB3&index=5)
 
 ## Table of Contents
 <!-- ⛔️ AUTO-GENERATED-CONTENT:START (TOC:collapse=true&collapseText=Click to expand) -->
 <details>
 <summary>Click to expand</summary>
-- [Tech used](#tech-used)
 - [Install](#install)
 - [Configuration](#configuration)
 - [Default settings](#default-settings)
@@ -18,13 +19,6 @@ Watch the [Backend Video Tutorials](https://www.youtube.com/watch?v=YtYjx3Z5LLo&
 - [Reloading for Ajax/Router driven sites](#reloading-for-ajaxrouter-driven-sites)
 </details>
 <!-- AUTO-GENERATED-CONTENT:END -->
-
-## Tech used
-
-- React
-- PostCSS
-- Axios for AJAX requests
-- Serverless for the backend API
 
 ## Install
 
