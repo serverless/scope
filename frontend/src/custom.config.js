@@ -4,6 +4,7 @@
  */
 module.exports = () => {
   return {
+    excludeReact: true,
     /* add your overides here */
   }
 }

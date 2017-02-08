@@ -8,12 +8,10 @@ var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var url = require('url');
 var paths = require('./paths');
 var getClientEnvironment = require('./env');
-const config = require("../src/config")()
+const config = require("../src/default.config")()
 var postCSSConfig = require('./postcss.config')(config)
 var AssetsPlugin = require('assets-webpack-plugin')
 var argv = require('yargs').argv;
-
-console.log('argv', argv)
 
 function ensureSlash(path, needsSlash) {
   var hasSlash = path.endsWith('/');
@@ -41,7 +39,7 @@ if (env['process.env'].NODE_ENV !== '"production"') {
 }
 
 var externals = []
-var excludeReact = (argv.excludeReact && argv.excludeReact !== 'false')
+var excludeReact = config.excludeReact
 if (excludeReact) {
   externals = [{
     'react': 'window.React',
@@ -148,6 +146,11 @@ module.exports = {
     }),
     new AssetsPlugin({path: pathModule.join(__dirname, '../build')}),
     new webpack.DefinePlugin(env),
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     'NODE_ENV': '"production"'
+    //   }
+    // }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({

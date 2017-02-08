@@ -1,4 +1,4 @@
-import config from '../config'
+import config from '../default.config'
 
 export default function getConfig() {
   return config()

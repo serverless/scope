@@ -13,9 +13,12 @@ var env = getClientEnvironment(publicUrl);
 /* Hot module reloading for PostCSS defined variables! */
 const postcssConfigFile = require.resolve("./postcss.config.js")
 const postcssConfig = (webpackInstance) => {
-  const varFile = require.resolve("../src/config.js")
+  const customConfigFile = require.resolve("../src/custom.config.js")
+  const varFile = require.resolve("../src/default.config.js")
   const varFileContents = () => {
+    webpackInstance.addDependency(customConfigFile)
     webpackInstance.addDependency(varFile)
+    delete require.cache[customConfigFile]
     delete require.cache[varFile]
     return require(varFile)()
   }

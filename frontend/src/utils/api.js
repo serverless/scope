@@ -11,8 +11,9 @@ const api = {
       return Promise.resolve([])
     }
     return axios.get(config.api.completed).then((response) => {
-      const body = JSON.parse(response.data.body)
-      return body.items
+      // console.log(response)
+      const items = response.data.items
+      return items
     }).catch((err) => {
       console.log(err)
       return []
@@ -24,8 +25,9 @@ const api = {
       return Promise.resolve([])
     }
     return axios.get(config.api.open).then((response) => {
-      const body = JSON.parse(response.data.body)
-      return sortIssues(body.items, config.columns)
+      // console.log(response)
+      const items = response.data.items
+      return sortIssues(items, config.columns)
     }).catch((err) => {
       console.log(err)
       return []

@@ -1,25 +1,19 @@
 var fs = require('fs')
 var path = require('path')
 var AWS = require('aws-sdk')
+var chalk = require('chalk')
 var scriptLoaderUtil = require('script-loader-util')
 var buildPath = path.join(__dirname, '../build')
 var assets = require('../build/asset-manifest.json')
+var config = require('../src/default.config')()
 var argv = require('yargs').argv
 
-console.log('argv', argv.bucket)
-console.log('path', argv.path)
-
-// Build assets generated from webpack
-/*
-console.log('assets', assets)
-/**/
-
 var file = path.join(buildPath, assets['main.js'])
-console.log('redeploying file', file)
+console.log(chalk.blue('Re-deploying file'), file)
 
 const appName = 'status-board'
-const bucketName = argv.bucket || `assets.site.serverless.com`
-const bucketPath = argv.path || `apps/${appName}`
+const bucketName = config.bucketName || `assets.site.serverless.com`
+const bucketPath = config.bucketPath || `apps/${appName}`
 const fullBucketPath = `${bucketName}/${formatBucketPath(bucketPath)}`
 // Read in the file, convert it to base64, store to S3
 fs.readFile(file, function (err, data) {
@@ -43,7 +37,10 @@ fs.readFile(file, function (err, data) {
     if (err) {
       console.log(err)
     }
-    console.log('App re-deployed', data.Location)
+    const reDeployUrl = chalk.yellow(`${data.Location}`)
+    console.log(' ')
+    console.log(chalk.green(`Success! Main script re-deployed`))
+    console.log(reDeployUrl)
     const url = decodeURIComponent(data.Location)
     // build loader
     var scriptName = `${appName}-script`
@@ -61,7 +58,24 @@ fs.readFile(file, function (err, data) {
         console.log(err)
       }
       const loaderUrl = decodeURIComponent(data.Location)
-      console.log('Script rebuilt and ready', loaderUrl)
+      const lurl = chalk.yellow(loaderUrl)
+      const scriptToInclude = chalk.yellow(`<script src="${loaderUrl}"
+type="text/javascript"></script>`)
+      const mountNodeToAdd = chalk.yellow(`<div id="${config.mountNodeID}"></div>`)
+      console.log(' ')
+      console.log(`${chalk.green('Success! Loader script rebuilt and re-deployed!')}
+${lurl}
+
+↓ Include the loader script in your site before the closing ${chalk.green('</body>')} tag ↓
+
+${scriptToInclude}
+
+Add the mount node to the page:
+
+${mountNodeToAdd}
+
+Thanks for using the status board! ⊂◉‿◉つ Tweet @DavidWells if you need any help
+`)
     });
 
   });

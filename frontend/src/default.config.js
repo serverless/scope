@@ -6,7 +6,6 @@ const merge = require('deepmerge')
 const customConfig = require('./custom.config')()
 
 module.exports = () => {
-
   const defaults = {
     /** Set the react mount node you want to use */
     mountNodeID: 'status-board',

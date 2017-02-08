@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import StatusBoard from './StatusBoard'
-import config from './config'
-const conf = config()
+import getConfig from './utils/get-config'
+
+const config = getConfig()
 
 const initStatusBoard = () => {
-  ReactDOM.render(<StatusBoard />, document.getElementById(conf.mountNodeID))
+  ReactDOM.render(<StatusBoard />, document.getElementById(config.mountNodeID))
 }
 
 // load react app
@@ -16,7 +17,7 @@ if (typeof window.statusBoardReload === 'undefined') {
   window.statusBoardReload = function() {
     console.log('reload');
     function resetApp() {
-      const mountNode = config().mountNodeID
+      const mountNode = config.mountNodeID
       // wait for mount node to load
       if (!document.getElementById(mountNode)) {
         setTimeout(resetApp, 50);

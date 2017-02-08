@@ -1,8 +1,16 @@
-# Scope - the serverless open source status board
+# Scope - Serverless Open Source Status Board
 
-The serverless open source status board is a customizable bird eye view of your github repository.
+Scope is a customizable birdeye's view of your open source project.
 
-Built using event driven serverless tech, the application can be cloned down and deployed for your open source project in minutes.
+Built using event driven serverless tech, the application can be cloned down & deployed for your open source project in minutes.
+
+Deploy it as a stand-alone application or embed it directly into your project's site.
+
+Run it for **[free](https://aws.amazon.com/free/)** under AWS's generous free tier.
+
+<!-- AUTO-GENERATED-CONTENT:START (TOC) -->
+
+<!-- AUTO-GENERATED-CONTENT:END -->
 
 ### Features:
 
@@ -10,13 +18,12 @@ Built using event driven serverless tech, the application can be cloned down and
 - Avoid github rate limiting via event driven webhooks
 - Customizable styles 💁
 - Map your projects tags into the columns you want
--
 
 Map your projects github labels to columns of your choosing and have them automatically update.
 
 ## Why?
 
-We built this tool for our community to help keep people up to speed with what is happening at a higher level and highlight where we actively want feedback.
+We built this tool for our community to help keep people up to speed with what is happening with the serverless project & to highlight places where we actively want feedback + collaboration.
 
 - Quickly sort and see high priority issues & Pull requests
 - Call out which issues need attention from your community
@@ -26,9 +33,9 @@ Diagram here
 
 GIF demo with link to YouTube video
 
-Frontend docs link here
+[Front-end Documentation & setup](./backend/README.md)
 
-Backend docs link here
+[Backend Documentation & setup](./backend/README.md)
 
 # Contributing
 
@@ -38,46 +45,9 @@ Want to contribute back to the project? Drop an issue or open up a PR.
 
 1. Deploy the serverless Backend. [Follow these instructions](./backend/README.md)
 
-2. Grab your API endpoints and plug them into the frontend
+2. Grab your API endpoints & plug them into the front-end in `/frontend/src/custom.config.js`
 
-3. Deploy the frontend to amazon s3
-
-  Alter the package.json `dist` script to point to your bucket of choice
-
-  ```json
-    "dist": "node scripts/dist.js --bucket=your.bucket.name.here --path=your/bucket/path",
-  ```
-
-  Then run `npm run dist` and it will upload the status board to your bucket and return a url for you to use on your site.
-
-4. Include script on your site!
-
-  ```html
-  <script src="http://your-bucket-url.com/status-board-loader.js"></script>
-  ```
-
-  If you are making updates to your config in the frontend or backend this script URL never needs to change, the `dist` command takes care of repacking the script and updating the `loader.js`
-
-5. Profit
-
-
-## Running the Backend
-
-1. Rename `config.prod.example.json` to `config.prod.json`
-2. Add github tokens
-3. Deploy from `/services/` directory
-
-```
-sls deploy
-```
-
-## Running the Frontend
-
-`cd frontend && npm start`
-
-## Future wishlist
-
-* The voting feature in the mock-up should not be implemented at this time.
+3. Configure the front-end columns with your projects labels, build and deploy it. [Follow these instructions](./frontend/README.md)
 
 ## FAQ
 
@@ -91,4 +61,8 @@ Nope. You choose what labels show up in each column
 
 **Do I have to show recently completed items?**
 
-Nope. You can toggle off that column in the frontend config.
+Nope. You can toggle off that column in the front-end config.
+
+**I just setup the front-end, where are the recently completed items?**
+
+They will start flowing in once you start closing issues/PRs in your repo
