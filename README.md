@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-## Scope - Serverless Open Source Status Board
+<h1>Scope - Serverless Open Source Status Board</h1>
 </p>
 
 Scope is a customizable birdeye's view of your open source project.
