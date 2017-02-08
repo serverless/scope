@@ -12,14 +12,16 @@ Deploy it as a stand-alone application or embed it directly into your project's 
 
 Run it for **[free](https://aws.amazon.com/free/)** under AWS's generous free tier.
 
-![statusgif](https://cloud.githubusercontent.com/assets/532272/22727459/cad63336-ed8d-11e6-8924-fce36f239a84.gif)
-
-<!-- AUTO-GENERATED-CONTENT:START (TOC) -->
-- [Features:](#features)
-- [Why we built it](#why)
+## Table of Contents
+<!-- ⛔️ AUTO-GENERATED-CONTENT:START (TOC:collapse=true&collapseText=Click to expand) -->
+<details>
+<summary>Click to expand</summary>
+- [Features](#features)
+- [Why we built it](#why-we-built-it)
 - [Contributing](#contributing)
 - [Setup](#setup)
 - [FAQ](#faq)
+</details>
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Features
