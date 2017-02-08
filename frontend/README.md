@@ -4,7 +4,10 @@ The status board front-end is fully configurable to suite your projects needs.
 
 Watch the [Backend Video Tutorials](https://www.youtube.com/watch?v=YtYjx3Z5LLo&list=PLIIjEI2fYC-BtxWcDeTziRp7cIZVEepB3&index=2) first, then follow on with the [Front-end Video Tutorials](https://www.youtube.com/watch?v=DXazDrLc2u4&list=PLIIjEI2fYC-BtxWcDeTziRp7cIZVEepB3&index=5)
 
-<!-- AUTO-GENERATED-CONTENT:START (TOC) -->
+## Table of Contents
+<!-- ⛔️ AUTO-GENERATED-CONTENT:START (TOC:collapse=true&collapseText=Click to expand) -->
+<details>
+<summary>Click to expand</summary>
 - [Tech used](#tech-used)
 - [Install](#install)
 - [Configuration](#configuration)
@@ -13,7 +16,8 @@ Watch the [Backend Video Tutorials](https://www.youtube.com/watch?v=YtYjx3Z5LLo&
   * [1. Deploying stand alone app](#1-deploying-stand-alone-app)
   * [2. Deploying embeddable app](#2-deploying-embeddable-app)
 - [Reloading for Ajax/Router driven sites](#reloading-for-ajaxrouter-driven-sites)
-<!-- AUTO-GENERATED-CONTENT:END (TOC) -->
+</details>
+<!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Tech used
 
