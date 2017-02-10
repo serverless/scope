@@ -7,9 +7,17 @@ export default function sortIssuesIntoColumns(issues) {
   const initial = config.columns.reduce((prev, current, i) => {
      prev[current.title] = []
      return prev
-  }, {})
+  }, {
+    assignees: {} // for sorting by assignees
+  })
   // build Issue state object to send back to column renderer
   const dynamicIssues = issues.reduce((previousValue, currentValue) => {
+    if (currentValue.assignees) {
+      // for sorting by assignees
+      currentValue.assignees.forEach((assignee) => {
+        previousValue.assignees[assignee.login] = true
+      })
+    }
     if (currentValue.labels) {
       // get labels from Item
       const labels = currentValue.labels.map((label) => {

@@ -89,6 +89,23 @@ export default class Column extends Component {
       columnItems = items.sort(order)
     }
 
+    // TODO figure out where to add assignees filter in UI
+    if (false) {
+      columnItems = columnItems.filter((item) => {
+        var match = false
+        if (item.assignees) {
+          item.assignees.forEach((assignee) => {
+            console.log(assignee.login)
+            if (assignee.login === 'pmuens') {
+              match = true
+            }
+          })
+        }
+        return match
+      })
+    }
+
+
     // sort and render
     return columnItems.map((item, i) => {
       const githubURL = githubIssueURL(item.number, config.repo)
