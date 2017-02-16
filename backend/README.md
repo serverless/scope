@@ -52,6 +52,8 @@ Watch the [Backend Video Tutorials](https://www.youtube.com/watch?v=YtYjx3Z5LLo&
 
 After you [added your values](#Configuration) to the newly created `config.prod.json` file, you are ready to deploy!
 
+0. Run `npm install` to install the dependancies
+
 1. Run `serverless deploy` and wait for the stack to be created
 
   [Watch the Backend configuration video](https://www.youtube.com/watch?v=dbfTNYgWIuI&index=2&list=PLIIjEI2fYC-BtxWcDeTziRp7cIZVEepB3)
