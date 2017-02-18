@@ -6,7 +6,6 @@ var scriptLoaderUtil = require('script-loader-util')
 var buildPath = path.join(__dirname, '../build')
 var assets = require('../build/asset-manifest.json')
 var config = require('../src/default.config')()
-var argv = require('yargs').argv
 
 var file = path.join(buildPath, assets['main.js'])
 console.log(chalk.blue('Re-deploying file'), file)
