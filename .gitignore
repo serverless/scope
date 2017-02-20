@@ -22,5 +22,6 @@ config.prod.json
 .env
 npm-debug.log
 dev-serverless.yml
+.idea
 
 /frontend/src/custom.config.js
