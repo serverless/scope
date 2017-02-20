@@ -11,7 +11,6 @@ var getClientEnvironment = require('./env');
 const config = require("../src/default.config")()
 var postCSSConfig = require('./postcss.config')(config)
 var AssetsPlugin = require('assets-webpack-plugin')
-var argv = require('yargs').argv;
 
 function ensureSlash(path, needsSlash) {
   var hasSlash = path.endsWith('/');
