@@ -46,7 +46,7 @@ We built this tool for our community to help keep people up to speed with what i
 - Call out which issues need attention from your community
 - Zoom into important aspect of your open source project
 
-[Front-end Documentation & setup](./backend/README.md)
+[Front-end Documentation & setup](./frontend/README.md)
 
 [Backend Documentation & setup](./backend/README.md)
 
