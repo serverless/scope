@@ -4,7 +4,7 @@
 
 # Scope - Serverless Open Source Status Board</h1>
 
-Scope is a customizable birdeye's view of your Github project.
+Scope is a customizable bird's eye view of your Github project.
 
 It automatically pulls in issues & Pull requests and sorts them into columns you define. Think github projects on steroids.
 
