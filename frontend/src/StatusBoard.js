@@ -54,9 +54,15 @@ export default class StatusBoard extends Component {
   }
   handleDesktopResize = (e) => {
     if (window.outerWidth > 670) {
-      this.columnNodes.forEach((column) => {
+      // this.columnNodes.forEach((column) => {
+      //   column.style.display = 'block'
+      // })
+      const columnNodes = this.columnNodes
+      // safari choking on forEach ¯\_(ツ)_/¯
+      for (var i = 0; i < columnNodes.length; i++) {
+        const column = columnNodes[i]
         column.style.display = 'block'
-      })
+      }
     }
   }
   renderColumns() {
