@@ -5,27 +5,28 @@ import getConfig from './utils/get-config'
 
 const config = getConfig()
 
-const initStatusBoard = () => {
+const startReactApp = () => {
   ReactDOM.render(<StatusBoard />, document.getElementById(config.mountNodeID))
 }
 
-// load react app
-initStatusBoard()
-
 /* Reload function for ajax drvien sites */
-if (typeof window.statusBoardReload === 'undefined') {
-  window.statusBoardReload = function() {
-    console.log('reload');
-    function resetApp() {
-      const mountNode = config.mountNodeID
+if (typeof window.loadStatusBoard === 'undefined') {
+  window.loadStatusBoard = function() {
+    function initializeApp() {
+      const mountNode = document.getElementById(config.mountNodeID)
+      const scriptsReady = typeof window.React !== 'undefined' && typeof window.ReactDOM !== 'undefined'
       // wait for mount node to load
-      if (!document.getElementById(mountNode)) {
-        setTimeout(resetApp, 50);
-        return;
+      if (!mountNode || !scriptsReady) {
+        setTimeout(initializeApp, 50)
+        return
       }
-      // reload react app with window.statusBoardReload() call
-      initStatusBoard();
+      // react & mount node ready, start react app
+      startReactApp()
     }
-    resetApp();
+    // start recursive bootstrap call
+    initializeApp()
   }
 }
+
+// load react app
+window.loadStatusBoard()
