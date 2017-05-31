@@ -24,8 +24,8 @@ module.exports = () => {
     api: {
       // open: 'https://kouf9xf85f.execute-api.us-west-2.amazonaws.com/dev/issues',
       // completed: 'https://kouf9xf85f.execute-api.us-west-2.amazonaws.com/dev/completed'
-      open: 'https://9985hyiut1.execute-api.us-west-2.amazonaws.com/prod/open',
-      completed: 'https://9985hyiut1.execute-api.us-west-2.amazonaws.com/prod/closed'
+      open: 'https://zn7b20d07j.execute-api.us-west-2.amazonaws.com/prod/open',
+      completed: 'https://zn7b20d07j.execute-api.us-west-2.amazonaws.com/prod/closed'
     },
     /** Recently completed column settings */
     recentlyCompleted: {
