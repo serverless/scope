@@ -8,8 +8,10 @@ Watch the [Backend Video Tutorials](https://www.youtube.com/watch?v=YtYjx3Z5LLo&
 <!-- ⛔️ AUTO-GENERATED-CONTENT:START (TOC:collapse=true&collapseText=Click to expand) -->
 <details>
 <summary>Click to expand</summary>
+
 - [Configuration](#configuration)
 - [Setup](#setup)
+
 </details>
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -22,17 +24,18 @@ Watch the [Backend Video Tutorials](https://www.youtube.com/watch?v=YtYjx3Z5LLo&
 1. Duplicate `config.prod.example.json` into a file named `config.prod.json` and fill in your repositories values.
 
   <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./config.prod.example.json) -->
-  <!-- The below code snippet is automatically added from ./config.prod.example.json -->
-  ```json
-  {
-    "region": "us-west-2",
-    "REPO": "username/repoName",
-    "GITHUB_WEBHOOK_SECRET": "xxxxx",
-    "GITHUB_API_TOKEN": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    "GITHUB_USERNAME": "YourGithubUserName"
-  }
-  ```
-  <!-- AUTO-GENERATED-CONTENT:END -->
+<!-- The below code snippet is automatically added from ./config.prod.example.json -->
+```json
+{
+  "projectName": "tester",
+  "region": "us-west-2",
+  "REPO": "username/repoName",
+  "GITHUB_WEBHOOK_SECRET": "xxxxx",
+  "GITHUB_API_TOKEN": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "GITHUB_USERNAME": "YourGithubUserName"
+}
+```
+<!-- AUTO-GENERATED-CONTENT:END -->
 
 2. You will also need to update `ADD_YOUR_REPO_NAME_HERE` in the `serverless.yml` file.
 

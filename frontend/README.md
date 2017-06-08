@@ -10,6 +10,7 @@ Watch the [Backend Video Tutorials](https://www.youtube.com/watch?v=YtYjx3Z5LLo&
 <!-- ⛔️ AUTO-GENERATED-CONTENT:START (TOC:collapse=true&collapseText=Click to expand) -->
 <details>
 <summary>Click to expand</summary>
+
 - [Install](#install)
 - [Configuration](#configuration)
 - [Default settings](#default-settings)
@@ -17,6 +18,7 @@ Watch the [Backend Video Tutorials](https://www.youtube.com/watch?v=YtYjx3Z5LLo&
   * [1. Deploying stand alone app](#1-deploying-stand-alone-app)
   * [2. Deploying embeddable app](#2-deploying-embeddable-app)
 - [Reloading for Ajax/Router driven sites](#reloading-for-ajaxrouter-driven-sites)
+
 </details>
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -63,8 +65,8 @@ module.exports = () => {
     api: {
       // open: 'https://kouf9xf85f.execute-api.us-west-2.amazonaws.com/dev/issues',
       // completed: 'https://kouf9xf85f.execute-api.us-west-2.amazonaws.com/dev/completed'
-      open: 'https://9985hyiut1.execute-api.us-west-2.amazonaws.com/prod/open',
-      completed: 'https://9985hyiut1.execute-api.us-west-2.amazonaws.com/prod/closed'
+      open: 'https://zn7b20d07j.execute-api.us-west-2.amazonaws.com/prod/open',
+      completed: 'https://zn7b20d07j.execute-api.us-west-2.amazonaws.com/prod/closed'
     },
     /** Recently completed column settings */
     recentlyCompleted: {

@@ -17,6 +17,6 @@
     "aws-sdk": "^2.18.0"
   },
   "devDependencies": {
-    "markdown-magic": "^0.1.13"
+    "markdown-magic": "^0.1.17"
   }
 }
