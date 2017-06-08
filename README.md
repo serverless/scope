@@ -18,11 +18,13 @@ Run it for **[free](https://aws.amazon.com/free/)** under AWS's generous free ti
 <!-- ⛔️ AUTO-GENERATED-CONTENT:START (TOC:collapse=true&collapseText=Click to expand) -->
 <details>
 <summary>Click to expand</summary>
+
 - [Features](#features)
 - [Why we built it](#why-we-built-it)
 - [Contributing](#contributing)
 - [Setup](#setup)
 - [FAQ](#faq)
+
 </details>
 <!-- AUTO-GENERATED-CONTENT:END -->
 

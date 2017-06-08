@@ -8,6 +8,6 @@
     "docs": "md-magic --path 'README.md' --ignore 'node_modules'"
   },
   "devDependencies": {
-    "markdown-magic": "^0.1.13"
+    "markdown-magic": "^0.1.17"
   }
 }
