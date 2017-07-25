@@ -196,7 +196,7 @@ export default class Column extends Component {
       if (item.labels && item.labels.length) {
         // console.log(item.labels)
         item.labels.forEach((l, n) => {
-          const githubLabelLink = `https://github.com/serverless/serverless/labels/${l.name}`
+          const githubLabelLink = `https://github.com/${config.repo}/labels/${l.name}`
           testTags.push(
             <a key={n} className={styles.labelLink} href={githubLabelLink} target='_blank'>
               <span className={styles.tag} style={{background: `#${l.color}`}}>
