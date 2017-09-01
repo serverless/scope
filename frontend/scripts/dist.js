@@ -2,7 +2,7 @@ var fs = require('fs')
 var path = require('path')
 var AWS = require('aws-sdk')
 var chalk = require('chalk')
-var scriptLoaderUtil = require('script-loader-util')
+// var scriptLoaderUtil = require('script-loader-util')
 var buildPath = path.join(__dirname, '../build')
 var assets = require('../build/asset-manifest.json')
 var config = require('../src/default.config')()
@@ -44,6 +44,7 @@ fs.readFile(file, function (err, data) {
     // build loader
     var scriptName = `${appName}-script`
     var loaderScript = scriptLoaderUtil(scriptName, url)
+    console.log('new script', loaderScript)
     var loaderBase64data = new Buffer(loaderScript, 'binary');
     var loaderParams = {
       Bucket: fullBucketPath,
@@ -80,6 +81,45 @@ Thanks for using the status board! ⊂◉‿◉つ Tweet @DavidWells if you need
   });
 
 });
+
+
+function scriptLoaderUtil(name, src) {
+    var script = `
+(function (w, d) {
+  var script, newScript, loaded
+
+  function ready(fn) {
+    console.log('dom ready')
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+
+  loaded = '${name}'
+
+  if (!w[loaded]) {
+    // don't run next time
+    w[loaded] = true
+
+    ready(function ____init() {
+      // avoid KB927917 error in IE8
+      w.setTimeout(function () {
+        script = d.getElementsByTagName('SCRIPT')[0]
+        newScript = d.createElement('SCRIPT')
+        newScript.type = 'text/javascript'
+        newScript.async = true
+        newScript.src = '${src}'
+
+        script.parentNode.insertBefore(newScript, script)
+      }, 10)
+    })
+  }
+}(window, document))
+`
+return script
+}
 
 function formatBucketPath(path){
   return path.replace(/^\//, '').replace(/\/$/, '')
