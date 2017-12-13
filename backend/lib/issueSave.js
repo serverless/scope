@@ -28,9 +28,14 @@ function saveClosedIssue(issue, callback) {
     if (DEBUG) {
       console.log(`issue ${issue.number} deleted from ${OPEN_ITEMS_TABLE} Table`, resp)
     }
+    var oneMonthFromNow = new Date(Date.now() + (30 * 24 * 60 * 60 * 1000))
+    var issueWithTTL = issue
+    // add Dynamo TTL attribute to auto delete in 30 days
+    issueWithTTL.ttl = oneMonthFromNow.getTime();
+
     db.put({
       TableName: CLOSED_ITEMS_TABLE,
-      Item: issue
+      Item: issueWithTTL
     }, function(error, response) {
       if (error) return callback(error)
       if (DEBUG) {

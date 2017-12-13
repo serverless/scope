@@ -10,6 +10,7 @@ custom:
   openItemsTable: ${self:custom.repoName}-${self:custom.currentStage}-open-items
   closedItemsTable: ${self:custom.repoName}-${self:custom.currentStage}-closed-items
 
+
 # 'provider' specifies where to deploy the service. Aka deploy to 'aws'
 provider:
   name: aws
@@ -104,3 +105,6 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+        TimeToLiveSpecification:
+          AttributeName: ttl
+          Enabled: true
