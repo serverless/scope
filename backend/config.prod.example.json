@@ -1,4 +1,5 @@
 {
+  "projectName": "tester",
   "region": "us-west-2",
   "REPO": "username/repoName",
   "GITHUB_WEBHOOK_SECRET": "xxxxx",
