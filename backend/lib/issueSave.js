@@ -31,7 +31,7 @@ function saveClosedIssue(issue, callback) {
     var oneMonthFromNow = new Date(Date.now() + (30 * 24 * 60 * 60 * 1000))
     var issueWithTTL = issue
     // add Dynamo TTL attribute to auto delete in 30 days
-    issueWithTTL.ttl = oneMonthFromNow.getTime();
+    issueWithTTL.ttl = Math.round(oneMonthFromNow.getTime() / 1000)
 
     db.put({
       TableName: CLOSED_ITEMS_TABLE,
